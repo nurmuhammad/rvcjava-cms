@@ -13,7 +13,7 @@ import com.vaadin.ui.UI;
 @Title("Install RVC CMS")
 @Theme("admin")
 @Widgetset("rvc.cms.Widgetset")
-public class IntstallUI extends UI {
+public class InstallUI extends UI {
 
     @Override
     protected void init(VaadinRequest request) {

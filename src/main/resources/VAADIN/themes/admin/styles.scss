@@ -1,34 +1,7 @@
-/* This font-face declaration must be outside your theme mixin. */
-@font-face {
-    font-family: 'Vaadin-Icons';
-    src: url('fonts/Vaadin-Icons.eot');
-    src: url('fonts/Vaadin-Icons.eot?#iefix') format('embedded-opentype'),
-    url('fonts/Vaadin-Icons.woff') format('woff'),
-    url('fonts/Vaadin-Icons.ttf') format('truetype'),
-    url('fonts/Vaadin-Icons.svg#icomoon') format('svg');
-}
-.Vaadin-Icons {
-    font-family: 'Vaadin-Icons';
-}
-
-$v-table-background-color: white;
-$v-table-border-color: #EEEEEE;
-
-
 @import "../valo/valo.scss";
 
 .admin {
   @include valo;
-  // Your theme's rules go here
 
-    .valo-menu-logo{
-        background-color: transparent;
-        background-image: none;
-        width: 60px;
-        height: 60px;
 
-        img{
-            width: 100%;
-        }
-    }
 }

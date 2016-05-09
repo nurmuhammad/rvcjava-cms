@@ -1,4 +1,4 @@
-package rvc.cms;
+package rvc.cms.admin;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
