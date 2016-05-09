@@ -6,8 +6,18 @@
         <additionalProperties>
           <property key="Bundle-Description" value="Simpple RVC CMSFramework" />
           <property key="Bundle-Name" value="RVC CMS" />
+          <property key="Include-Resource" value="rvc.cms/Widgetset.gwt.xml=$MODULE_DIR$/src/main/resources/rvc.cms/Widgetset.gwt.xml,VAADIN/themes/admin/addons.scss=$MODULE_DIR$/src/main/resources/VAADIN/themes/admin/addons.scss,VAADIN/themes/admin/fonts/Vaadin-Icons.eot=$MODULE_DIR$/src/main/resources/VAADIN/themes/admin/fonts/Vaadin-Icons.eot,VAADIN/themes/admin/fonts/Vaadin-Icons.svg=$MODULE_DIR$/src/main/resources/VAADIN/themes/admin/fonts/Vaadin-Icons.svg,VAADIN/themes/admin/fonts/Vaadin-Icons.ttf=$MODULE_DIR$/src/main/resources/VAADIN/themes/admin/fonts/Vaadin-Icons.ttf,VAADIN/themes/admin/fonts/Vaadin-Icons.woff=$MODULE_DIR$/src/main/resources/VAADIN/themes/admin/fonts/Vaadin-Icons.woff,VAADIN/themes/admin/logo.png=$MODULE_DIR$/src/main/resources/VAADIN/themes/admin/logo.png,VAADIN/themes/admin/styles.css=$MODULE_DIR$/src/main/resources/VAADIN/themes/admin/styles.css,VAADIN/themes/admin/styles.scss=$MODULE_DIR$/src/main/resources/VAADIN/themes/admin/styles.scss" />
         </additionalProperties>
         <additionalJARContents />
+      </configuration>
+    </facet>
+    <facet type="gwt" name="GWT">
+      <configuration>
+        <setting name="additionalCompilerParameters" value="-Xss1024k" />
+        <setting name="compilerMaxHeapSize" value="512" />
+        <setting name="gwtScriptOutputStyle" value="OBF" />
+        <setting name="gwtSdkUrl" value="file://C:\Users\Nurmuhammad\.m2\repository/com/vaadin/vaadin-client/7.6.5" />
+        <setting name="gwtSdkType" value="Vaadin-Maven" />
       </configuration>
     </facet>
   </component>
@@ -39,6 +49,7 @@
     <orderEntry type="library" name="Maven: org.eclipse.jetty.websocket:websocket-client:9.3.8.v20160314" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty.websocket:websocket-servlet:9.3.8.v20160314" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty.websocket:websocket-api:9.3.8.v20160314" level="project" />
+    <orderEntry type="library" name="Maven: com.h2database:h2:1.4.191" level="project" />
     <orderEntry type="library" name="Maven: com.mitchellbosecke:pebble:2.2.1" level="project" />
     <orderEntry type="library" name="Maven: com.google.guava:guava:16.0.1" level="project" />
     <orderEntry type="library" name="Maven: com.coverity.security:coverity-escapers:1.1" level="project" />
@@ -51,17 +62,20 @@
     <orderEntry type="library" name="Maven: org.mapdb:mapdb:1.0.8" level="project" />
     <orderEntry type="library" name="Maven: org.quartz-scheduler:quartz:2.2.2" level="project" />
     <orderEntry type="library" name="Maven: org.quartz-scheduler:quartz-jobs:2.2.2" level="project" />
-    <orderEntry type="library" name="Maven: com.vaadin:vaadin-server:7.6.4" level="project" />
+    <orderEntry type="library" name="Maven: com.vaadin:vaadin-server:7.6.5" level="project" />
     <orderEntry type="library" name="Maven: com.vaadin:vaadin-sass-compiler:0.9.13" level="project" />
-    <orderEntry type="library" name="Maven: org.w3c.css:sac:1.3" level="project" />
     <orderEntry type="library" name="Maven: com.vaadin.external.flute:flute:1.3.0.gg2" level="project" />
     <orderEntry type="library" name="Maven: com.yahoo.platform.yui:yuicompressor:2.4.8" level="project" />
     <orderEntry type="library" name="Maven: rhino:js:1.7R2" level="project" />
-    <orderEntry type="library" name="Maven: com.vaadin:vaadin-shared:7.6.4" level="project" />
+    <orderEntry type="library" name="Maven: com.vaadin:vaadin-shared:7.6.5" level="project" />
     <orderEntry type="library" name="Maven: com.vaadin.external.streamhtmlparser:streamhtmlparser-jsilver:0.0.10.vaadin1" level="project" />
     <orderEntry type="library" name="Maven: com.vaadin.external.google:guava:16.0.1.vaadin1" level="project" />
     <orderEntry type="library" name="Maven: org.jsoup:jsoup:1.8.3" level="project" />
-    <orderEntry type="library" name="Maven: com.vaadin:vaadin-client-compiled:7.6.4" level="project" />
-    <orderEntry type="library" name="Maven: com.vaadin:vaadin-themes:7.6.4" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.vaadin:vaadin-client:7.6.5" level="project" />
+    <orderEntry type="library" name="Maven: org.w3c.css:sac:1.3" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: javax.validation:validation-api:1.0.0.GA" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: javax.validation:validation-api:sources:1.0.0.GA" level="project" />
+    <orderEntry type="library" name="Maven: com.vaadin:vaadin-themes:7.6.5" level="project" />
+    <orderEntry type="library" name="Maven: org.vaadin.addons:aceeditor:0.8.14" level="project" />
   </component>
 </module>
