@@ -17,16 +17,16 @@ import java.util.Map;
  * @author nurmuhammad
  */
 
-public abstract class GenericDao<E> {
+public abstract class Dao<E> {
 
-    private static final Logger logger = LoggerFactory.getLogger(GenericDao.class);
+    private static final Logger logger = LoggerFactory.getLogger(Dao.class);
 
     public static final ObjectPool<Sql2o> pool = new GenericObjectPool<>(new Sql2oFactory());
 
     public Class<E> className;
 
     @SuppressWarnings("unchecked")
-    public GenericDao() {
+    public Dao() {
         try {
             className = (Class<E>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
         } catch (Throwable e) {
@@ -35,7 +35,15 @@ public abstract class GenericDao<E> {
         }
     }
 
-    public synchronized Sql2o sql2o() {
+    public Query addColumnMapping(Query query) {
+        Map<String, String> map = aModel.getColumnMaps().get(className);
+        if (map == null || map.isEmpty()) return query;
+        map.keySet().stream().forEach(s -> query.addColumnMapping(s, map.get(s)));
+
+        return query;
+    }
+
+    public static synchronized Sql2o sql2o() {
         try {
             return pool.borrowObject();
         } catch (Exception e) {
@@ -45,23 +53,13 @@ public abstract class GenericDao<E> {
         return new Sql2o(PoolService.getDataSource());
     }
 
-    public void returnSql2o(Sql2o sql2o) {
+    public static synchronized void returnSql2o(Sql2o sql2o) {
         try {
             sql2o.getDefaultColumnMappings().clear();
             pool.returnObject(sql2o);
         } catch (Exception e) {
             logger.error("Throws error when returning Sql2o object to the pool.", e);
         }
-    }
-
-    public Query addColumnMapping(Query query) {
-        Map<String, String> map = aModel.getColumnMaps().get(className);
-        if (map == null || map.isEmpty()) return query;
-        map.keySet().stream().forEach(s -> {
-            query.addColumnMapping(s, map.get(s));
-        });
-
-        return query;
     }
 
 }
