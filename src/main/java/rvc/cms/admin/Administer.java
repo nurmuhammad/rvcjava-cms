@@ -1,8 +1,9 @@
 package rvc.cms.admin;
 
 /**
- * Created by Nurmuhammad on 09.05.2016.
+ * @author nurmuhammad
  */
+
 
 public class Administer {
 

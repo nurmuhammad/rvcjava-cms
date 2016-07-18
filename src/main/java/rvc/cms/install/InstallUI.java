@@ -7,8 +7,9 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.UI;
 
 /**
- * Created by Nurmuhammad on 09.05.2016.
+ * @author nurmuhammad
  */
+
 
 @Title("Install RVC CMS")
 @Theme("admin")
