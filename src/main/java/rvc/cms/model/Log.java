@@ -4,7 +4,7 @@ package rvc.cms.model;
  * @author nurmuhammad
  */
 
-public class Log {
+public class Log extends aModel {
     public long id;
     public long userId;
     public String type;

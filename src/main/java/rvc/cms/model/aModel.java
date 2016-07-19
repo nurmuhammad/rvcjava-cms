@@ -15,6 +15,8 @@ import java.util.Set;
 
 public abstract class aModel implements Serializable {
 
+    public static Map<Class<? extends aModel>, String> tableNames = new HashMap<>();
+
     private static Map<Class<? extends aModel>, Map<String, String>> columnMaps;
 
     public static Map<Class<? extends aModel>, Map<String, String>> getColumnMaps() {
@@ -29,8 +31,6 @@ public abstract class aModel implements Serializable {
 
         Set<Class<? extends aModel>> classes = reflections.getSubTypesOf(aModel.class);
 
-        final String regex = "([a-z])([A-Z])";
-        final String replacement = "$1_$2";
         classes.stream().forEach(aModel::getColumnMaps);
 
         return columnMaps;
@@ -53,5 +53,25 @@ public abstract class aModel implements Serializable {
         }
 
         return columnMaps;
+    }
+
+    public static String table(Class clazz) {
+        String table = tableNames.get(clazz);
+        if (table != null) return table;
+        try {
+            Field f = rvc.cms.model.Field.class.getDeclaredField("table");
+            f.setAccessible(true);
+            table = f.get(null).toString();
+            tableNames.put(clazz, table);
+            return table;
+        } catch (Exception ignored) {}
+
+        table = clazz.getSimpleName();
+        final String regex = "([a-z])([A-Z])";
+        final String replacement = "$1_$2";
+        table = table.replaceAll(regex, replacement).toLowerCase();
+        if (!table.endsWith("s")) table += "s";
+        tableNames.put(clazz, table);
+        return table;
     }
 }

@@ -1,12 +1,13 @@
 package rvc.cms.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * @author nurmuhammad
  */
 
-public class Field {
+public class Field extends aModel {
 
     public long id;
     public long userId;
@@ -22,4 +23,10 @@ public class Field {
 
     public ArrayList<FieldValue> values;
 
+    static String t = "eeee";
+
+    public static void main(String[] args) throws Exception {
+        java.lang.reflect.Field f = Field.class.getDeclaredField("t");
+        System.out.println(f.get(null));
+    }
 }

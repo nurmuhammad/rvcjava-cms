@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * @author nurmuhammad
  */
 
-public class Node {
+public class Node extends aModel {
 
     public long id;
     public long userId;

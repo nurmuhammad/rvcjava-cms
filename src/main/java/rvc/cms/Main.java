@@ -1,11 +1,18 @@
 package rvc.cms;
 
 import com.google.gson.Gson;
+import org.RvcServlet;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import rvc.ResponseTransformer;
 import rvc.RvcHandler;
 import rvc.RvcServer;
+import rvc.cms.admin.AdminUI;
+
+/**
+ * @author nurmuhammad
+ */
+
 
 public class Main {
 
@@ -23,10 +30,14 @@ public class Main {
         rvcHandler.addServlet(sh, "/administer");
         rvcHandler.addServlet(sh, "/administer/*");
         rvcHandler.addServlet(sh, "/VAADIN/*");
-//        rvcHandler.setInitParameter("ui", AdminUI.class.getCanonicalName());
-//        rvcHandler.setInitParameter("productionMode", "false");
-//        rvcHandler.setInitParameter("theme", "admin");
-//        rvcHandler.setInitParameter("widgetset", "rvc.cms.Widgetset");
+        rvcHandler.setInitParameter("ui", AdminUI.class.getCanonicalName());
+        rvcHandler.setInitParameter("productionMode", "false");
+        rvcHandler.setInitParameter("theme", "admin");
+        rvcHandler.setInitParameter("widgetset", "rvc.cms.Widgetset");
+
+        rvcServer.get("test", () -> {
+            return "test";
+        });
 
         rvcServer.start();
 

@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * @author nurmuhammad
  */
 
-public class NodeType {
+public class NodeType extends aModel {
     public long id;
 
     public String type;

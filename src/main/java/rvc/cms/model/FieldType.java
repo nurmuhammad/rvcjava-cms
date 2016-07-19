@@ -6,7 +6,7 @@ import java.util.Map;
  * @author nurmuhammad
  */
 
-public class FieldType {
+public class FieldType extends aModel {
     public long id;
     public long nodeTypeId;
 

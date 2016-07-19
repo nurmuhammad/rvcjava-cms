@@ -4,7 +4,7 @@ package rvc.cms.model;
  * @author nurmuhammad
  */
 
-public class Vote {
+public class Vote extends aModel {
     public long id;
     public long nodeId;
     public long userId;

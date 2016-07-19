@@ -4,7 +4,7 @@ package rvc.cms.model;
  * @author nurmuhammad
  */
 
-public class FieldValue {
+public class FieldValue extends aModel {
     public long id;
     public long userId;
     public long fieldId;

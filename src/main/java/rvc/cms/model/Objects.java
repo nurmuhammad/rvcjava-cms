@@ -4,7 +4,7 @@ package rvc.cms.model;
  * @author nurmuhammad
  */
 
-public class Objects {
+public class Objects extends aModel {
     public long id;
     public String name;
     public String description;

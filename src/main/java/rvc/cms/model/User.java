@@ -4,7 +4,7 @@ package rvc.cms.model;
  * @author nurmuhammad
  */
 
-public class User {
+public class User extends aModel {
     public long id;
     public String roles;
     public String email;
