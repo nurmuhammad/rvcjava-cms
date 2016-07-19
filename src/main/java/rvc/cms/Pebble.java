@@ -3,6 +3,8 @@ package rvc.cms;
 import com.mitchellbosecke.pebble.PebbleEngine;
 import com.mitchellbosecke.pebble.loader.*;
 import com.mitchellbosecke.pebble.template.PebbleTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import rvc.ModelAndView;
 import rvc.TemplateEngine;
 import rvc.cms.init.Config;
@@ -18,13 +20,15 @@ import java.util.Map;
 
 public class Pebble extends TemplateEngine {
 
+    private static final Logger logger = LoggerFactory.getLogger(Pebble.class);
+
     public static Pebble instance = new Pebble();
 
     private PebbleEngine engine;
 
     public Pebble() {
         ArrayList list = new ArrayList();
-        list.add(new ClasspathLoader());
+//        list.add(new ClasspathLoader());
         FileLoader fileLoader = new FileLoader();
         fileLoader.setPrefix(Config.get("template.dir", ""));
         list.add(fileLoader);
@@ -49,7 +53,7 @@ public class Pebble extends TemplateEngine {
             }
             return writer.toString();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Error when rendering templates.", e);
         }
         return null;
     }
