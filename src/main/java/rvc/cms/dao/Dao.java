@@ -67,7 +67,7 @@ public abstract class Dao<E> {
         fields.append("insert into ").append(table).append("(");
         StringBuilder values = new StringBuilder();
         Field[] fs = object.getClass().getDeclaredFields();
-        for (int i = 0; i > fs.length; i++) {
+        for (int i = 0; i < fs.length; i++) {
             Field field = fs[i];
             fields.append(field.getName());
             values.append(":").append(field.getName());
@@ -83,7 +83,8 @@ public abstract class Dao<E> {
     public E insert(E object, String sql) {
         Sql2o sql2o = sql2o();
         try (Connection con = sql2o.open()) {
-            addColumnMapping(con.createQuery(sql)).bind(object).executeUpdate();
+            Query query = con.createQuery(sql);
+            addColumnMapping(query).bind(object).executeUpdate();
             try {
                 Field field = object.getClass().getDeclaredField("id");
                 Long id = con.getKey(Long.class);
