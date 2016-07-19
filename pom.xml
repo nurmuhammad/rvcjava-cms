@@ -26,9 +26,9 @@
         <slf4j.version>1.7.13</slf4j.version>
         <h2.version>1.4.191</h2.version>
         <sql2o.version>1.5.4</sql2o.version>
-        <vaadin.version>7.6.5</vaadin.version>
+        <vaadin.version>7.6.8</vaadin.version>
         <vaadin.plugin.version>${vaadin.version}</vaadin.plugin.version>
-        <pebble.version>2.2.1</pebble.version>
+        <pebble.version>2.2.2</pebble.version>
     </properties>
 
     <repositories>

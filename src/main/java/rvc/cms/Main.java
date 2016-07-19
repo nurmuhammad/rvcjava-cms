@@ -1,18 +1,17 @@
 package rvc.cms;
 
-import com.google.gson.Gson;
-import org.RvcServlet;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
-import rvc.ResponseTransformer;
-import rvc.RvcHandler;
-import rvc.RvcServer;
+import rvc.*;
+import rvc.cms.admin.AdminServlet;
 import rvc.cms.admin.AdminUI;
+import rvc.cms.init.Config;
+import rvc.http.Response;
+import rvc.http.Session;
 
 /**
  * @author nurmuhammad
  */
-
 
 public class Main {
 
@@ -20,12 +19,14 @@ public class Main {
 
         RvcServer rvcServer = new RvcServer();
 
+        rvcServer.port(Config.get("server.port", 4567));
+
         RvcHandler rvcHandler = rvcServer.init();
 
         ServletContextHandler handler = new ServletContextHandler(ServletContextHandler.SESSIONS);
         handler.setContextPath("/");
 
-        ServletHolder sh = new ServletHolder(new RvcServlet());
+        ServletHolder sh = new ServletHolder(new AdminServlet());
 
         rvcHandler.addServlet(sh, "/administer");
         rvcHandler.addServlet(sh, "/administer/*");
@@ -35,22 +36,18 @@ public class Main {
         rvcHandler.setInitParameter("theme", "admin");
         rvcHandler.setInitParameter("widgetset", "rvc.cms.Widgetset");
 
-        rvcServer.get("test", () -> {
-            return "test";
+        rvcServer.before("administer, administer/*", () -> {
+            Object o = Session.get().attribute("user");
+            Response.get().redirect("/login");
         });
+
+        rvcServer.get("login", () -> {
+            ModelAndView modelAndView = new ModelAndView(null, "home.html");
+            return modelAndView;
+        }, Pebble.instance);
 
         rvcServer.start();
 
-    }
-
-    static class JsonTransformer implements ResponseTransformer {
-
-        private Gson gson = new Gson();
-
-        @Override
-        public String transform(Object object) throws Exception {
-            return gson.toJson(object);
-        }
     }
 
 }
