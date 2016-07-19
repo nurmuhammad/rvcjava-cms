@@ -1,10 +1,11 @@
-package rvc.cms;
+package org;
 
 import rvc.RvcServer;
 
 /**
- * Created by Nurmuhammad on 09.05.2016.
+ * @author nurmuhammad
  */
+
 
 public class CmsRvcServer extends RvcServer {
 
