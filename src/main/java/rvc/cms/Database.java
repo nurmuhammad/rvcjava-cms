@@ -5,8 +5,10 @@ import org.javalite.activejdbc.Base;
 import rvc.cms.init.Config;
 
 /**
- * Created by Nurmuhammad on 20.07.2016.
+ * @author nurmuhammad
+ *
  */
+
 public class Database {
 
     public static Database instance = new Database();

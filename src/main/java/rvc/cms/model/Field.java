@@ -1,7 +1,5 @@
 package rvc.cms.model;
 
-import org.javalite.activejdbc.annotations.Table;
-
 /**
  * @author nurmuhammad
  */
