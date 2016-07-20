@@ -2,12 +2,16 @@ package rvc.cms;
 
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.javalite.activejdbc.Base;
 import rvc.*;
 import rvc.cms.admin.AdminServlet;
 import rvc.cms.admin.AdminUI;
 import rvc.cms.init.Config;
+import rvc.cms.model.User;
 import rvc.http.Response;
 import rvc.http.Session;
+
+import java.util.Date;
 
 /**
  * @author nurmuhammad
@@ -42,6 +46,15 @@ public class Main {
         });
 
         rvcServer.get("login", () -> {
+
+            Database.open();
+
+            User user = new User();
+            user.set("email", "email@email.com", "roles", "admin, moderate", "created", new Date().getTime()/1000);
+            user.saveIt();
+
+            Database.close();
+
             ModelAndView modelAndView = new ModelAndView(null, "home.html");
             return modelAndView;
         }, Pebble.instance);

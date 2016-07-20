@@ -15,6 +15,4 @@ public class NodeType extends aModel {
     public String domen;
     public boolean translate;
     public String settings;
-
-    public ArrayList<FieldType> fields;
 }

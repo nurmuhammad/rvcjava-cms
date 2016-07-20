@@ -10,6 +10,6 @@ public class Variable extends aModel {
     public byte[] value;
     public String type;
     public String settings;
-    public int created;
-    public int chaged;
+    public long created;
+    public long chaged;
 }

@@ -1,13 +1,3 @@
-@font-face {
-	font-family: "Vaadin-Icons";
-	src: url('fonts/Vaadin-Icons.eot');
-	src: url('fonts/Vaadin-Icons.eot?#iefix') format("embedded-opentype"), url('fonts/Vaadin-Icons.woff') format("woff"), url('fonts/Vaadin-Icons.ttf') format("truetype"), url('fonts/Vaadin-Icons.svg#icomoon') format("svg");
-}
-
-.Vaadin-Icons {
-	font-family: "Vaadin-Icons";
-}
-
 /**
  * Checks if a list contains a certain value.
  * 
@@ -1009,7 +999,7 @@
  */
 
 .v-vaadin-version:after {
-	content: "7.6.5";
+	content: "7.6.8";
 }
 
 .v-widget {
@@ -4435,6 +4425,8 @@ div.v-layout.v-horizontal.v-widget {
 
 .admin .v-grid-sidebar.v-contextmenu .v-grid-sidebar-content {
 	padding: 4px 0;
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 
 .admin .v-grid-sidebar.v-contextmenu .v-grid-sidebar-content .gwt-MenuBar .gwt-MenuItem .column-hiding-toggle {
@@ -4992,6 +4984,8 @@ div.v-layout.v-horizontal.v-widget {
 .admin .v-grid-sidebar.v-contextmenu.open .v-grid-sidebar-content {
 	margin: 0 0 2px;
 	padding: 4px 4px 2px;
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 
 .admin .v-grid-sidebar.v-contextmenu.closed {
@@ -8900,16 +8894,16 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .admin .v-table-header table, .admin .v-table-footer table, .admin .v-table-table {
-	-webkit-box-shadow: 0 0 0 1px #EEEEEE;
-	box-shadow: 0 0 0 1px #EEEEEE;
+	-webkit-box-shadow: 0 0 0 1px #d4d4d4;
+	box-shadow: 0 0 0 1px #d4d4d4;
 }
 
 .v-ie8 .admin .v-table-header table, .v-ie8 .admin .v-table-footer table, .v-ie8 .admin .v-table-table {
-	outline: 1px solid #EEEEEE;
+	outline: 1px solid #d4d4d4;
 }
 
 .admin .v-table-header-wrap, .admin .v-table-footer-wrap, .admin .v-table-header-drag {
-	border: 1px solid #EEEEEE;
+	border: 1px solid #d4d4d4;
 	background-color: #fafafa;
 	background-image: -webkit-linear-gradient(top, #fafafa 2%, #efefef 98%);
 	background-image: linear-gradient(to bottom,#fafafa 2%, #efefef 98%);
@@ -8928,7 +8922,7 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .admin .v-table-footer td {
-	border-left: 1px solid #EEEEEE;
+	border-left: 1px solid #d4d4d4;
 }
 
 .admin .v-table-footer-container, .admin .v-table-caption-container {
@@ -8955,7 +8949,7 @@ div.v-layout.v-horizontal.v-widget {
 
 .admin .v-table-caption-container, .admin .v-table-header-drag {
 	padding: 12px 12px 11px;
-	border-left: 1px solid #EEEEEE;
+	border-left: 1px solid #d4d4d4;
 }
 
 .admin .v-table-caption-container-align-right {
@@ -8974,7 +8968,7 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .admin .v-table-cell-content {
-	border-left: 1px solid #EEEEEE;
+	border-left: 1px solid #d4d4d4;
 	overflow: hidden;
 	height: 37px;
 	vertical-align: middle;
@@ -9012,7 +9006,7 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .admin .v-table-body {
-	border: 1px solid #EEEEEE;
+	border: 1px solid #d4d4d4;
 	-webkit-user-select: text;
 	-moz-user-select: text;
 	-ms-user-select: text;
@@ -9025,7 +9019,7 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .admin .v-table-table td {
-	border-top: 1px solid #EEEEEE;
+	border-top: 1px solid #d4d4d4;
 }
 
 .admin .v-table-table tr:first-child > td {
@@ -9344,11 +9338,11 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .admin .v-table-borderless .v-table-header-wrap {
-	border-bottom: 1px solid #EEEEEE;
+	border-bottom: 1px solid #d9d9d9;
 }
 
 .admin .v-table-borderless .v-table-footer-wrap {
-	border-top: 1px solid #EEEEEE;
+	border-top: 1px solid #d9d9d9;
 }
 
 .admin .v-table-compact .v-table-header-wrap, .admin .v-table-compact .v-table-footer-wrap, .admin .v-table-compact .v-table-header-drag, .admin .v-table-small .v-table-header-wrap, .admin .v-table-small .v-table-footer-wrap, .admin .v-table-small .v-table-header-drag {
@@ -12941,15 +12935,4 @@ div.v-layout.v-horizontal.v-widget {
 	display: inline-block;
 	width: 19px;
 	overflow: hidden;
-}
-
-.admin .valo-menu-logo {
-	background-color: transparent;
-	background-image: none;
-	width: 60px;
-	height: 60px;
-}
-
-.admin .valo-menu-logo img {
-	width: 100%;
 }

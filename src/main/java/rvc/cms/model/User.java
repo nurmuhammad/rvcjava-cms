@@ -1,17 +1,19 @@
 package rvc.cms.model;
 
+import org.javalite.activejdbc.Model;
+
 /**
  * @author nurmuhammad
  */
 
-public class User extends aModel {
+public class User extends Model {
     public long id;
     public String roles;
     public String email;
     public String password;
 
-    public int created;
-    public int chaged;
+    public long created;
+    public long chaged;
 
     public int lastLogin;
     public String lastIp;

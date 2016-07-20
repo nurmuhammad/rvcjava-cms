@@ -1,7 +1,6 @@
 package rvc.cms.model;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import org.javalite.activejdbc.annotations.Table;
 
 /**
  * @author nurmuhammad
@@ -17,16 +16,8 @@ public class Field extends aModel {
     public String group;
     public String settings;
     public int sort;
-    public int created;
-    public int changed;
+    public long created;
+    public long changed;
     public boolean status;
 
-    public ArrayList<FieldValue> values;
-
-    static String t = "eeee";
-
-    public static void main(String[] args) throws Exception {
-        java.lang.reflect.Field f = Field.class.getDeclaredField("t");
-        System.out.println(f.get(null));
-    }
 }

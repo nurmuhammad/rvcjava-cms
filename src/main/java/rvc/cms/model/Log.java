@@ -11,5 +11,5 @@ public class Log extends aModel {
     public String message;
     public String setting;
     public String hostname;
-    public int timestamp;
+    public long timestamp;
 }

@@ -11,5 +11,5 @@ public class Vote extends aModel {
     public String type;
     public double value;
     public String voteSource;
-    public int timestamp;
+    public long timestamp;
 }

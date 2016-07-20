@@ -36,6 +36,10 @@
             <id>vaadin-addons</id>
             <url>http://maven.vaadin.com/vaadin-addons</url>
         </repository>
+        <repository>
+            <id>javalite-activejdbc</id>
+            <url>https://mvnrepository.com/artifact/org.javalite/activejdbc</url>
+        </repository>
     </repositories>
 
     <dependencyManagement>
@@ -70,17 +74,12 @@
 			<version>${pebble.version}</version>
 		</dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.javalite/activejdbc -->
         <dependency>
-            <groupId>org.sql2o</groupId>
-            <artifactId>sql2o</artifactId>
-            <version>${sql2o.version}</version>
+            <groupId>org.javalite</groupId>
+            <artifactId>activejdbc</artifactId>
+            <version>1.4.11</version>
         </dependency>
-
-        <dependency>
-			<groupId>com.zaxxer</groupId>
-			<artifactId>HikariCP</artifactId>
-			<version>2.4.5</version>
-		</dependency>
 
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -106,30 +105,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-pool2</artifactId>
-            <version>2.4.2</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.mchange</groupId>
-            <artifactId>c3p0</artifactId>
-            <version>0.9.5</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.reflections</groupId>
-            <artifactId>reflections</artifactId>
-            <version>0.9.10</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.javassist</groupId>
-                    <artifactId>javassist</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
             <groupId>org.quartz-scheduler</groupId>
             <artifactId>quartz</artifactId>
             <version>2.2.2</version>
@@ -147,11 +122,6 @@
             <version>2.2.2</version>
         </dependency>
 
-        <dependency>
-            <groupId>net.openhft</groupId>
-            <artifactId>compiler</artifactId>
-            <version>2.2.1</version>
-        </dependency>
 
         <dependency>
             <groupId>org.xeustechnologies</groupId>
@@ -165,28 +135,6 @@
             <artifactId>javassist</artifactId>
             <version>3.20.0-GA</version>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.codehaus.groovy/groovy-all -->
-        <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
-            <version>2.4.7</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.orientechnologies</groupId>
-            <artifactId>orientdb-graphdb</artifactId>
-            <version>2.2.4</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java -->
-        <dependency>
-            <groupId>com.google.protobuf</groupId>
-            <artifactId>protobuf-java</artifactId>
-            <version>2.6.1</version>
-        </dependency>
-
-
 
         <!-- VAADIN dependencies -->
         <dependency>
@@ -261,6 +209,20 @@
                     <optimize>true</optimize>
                     <debug>true</debug>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.javalite</groupId>
+                <artifactId>activejdbc-instrumentation</artifactId>
+                <version>1.4.11</version>
+                <executions>
+                    <execution>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>instrument</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
             <plugin>
@@ -359,23 +321,6 @@
                 </executions>
 
             </plugin>
-
-            <!--<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <mainClass>rvc.cms.Main</mainClass>
-
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>lib/</classpathPrefix>
-                            <classpathMavenRepositoryLayout>true</classpathMavenRepositoryLayout>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>-->
 
         </plugins>
     </build>

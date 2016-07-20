@@ -11,8 +11,8 @@ public class Node extends aModel {
     public long id;
     public long userId;
     public String type;
-    public int created;
-    public int chaged;
+    public long created;
+    public long chaged;
     public boolean status;
 
     public String settings;
