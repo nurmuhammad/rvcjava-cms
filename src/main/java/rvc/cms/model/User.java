@@ -9,20 +9,100 @@ import org.javalite.activejdbc.annotations.BelongsTo;
 
 @BelongsTo(parent = Node.class, foreignKeyName = "profile_node_id")
 public class User extends Model {
-    public long id;
-    public String roles;
-    public String email;
-    public String password;
 
-    public long created;
-    public long changed;
+    public Long id() {
+        return (Long) get("id");
+    }
 
-    public int lastLogin;
-    public String lastIp;
-    public boolean status;
+    public void id(Long id) {
+        set("id", id);
+    }
 
-    public long profileNodeId;
+    public String roles() {
+        return (String) get("roles");
+    }
 
-    public String settings;
-    public String domen;
+    public void roles(String roles) {
+        set("roles", roles);
+    }
+
+    public String email() {
+        return (String) get("email");
+    }
+
+    public void email(String email) {
+        set("email", email);
+    }
+
+    public String password() {
+        return (String) get("password");
+    }
+
+    public void password(String password) {
+        set("password", password);
+    }
+
+    public Integer created() {
+        return (Integer) get("created");
+    }
+
+    public void created(Integer created) {
+        set("created", created);
+    }
+
+    public Integer changed() {
+        return (Integer) get("changed");
+    }
+
+    public void changed(Long changed) {
+        set("changed", changed);
+    }
+
+    public Long lastLogin() {
+        return (Long) get("last_login");
+    }
+
+    public void lastLogin(int lastLogin) {
+        set("last_login", lastLogin);
+    }
+
+    public String lastIp() {
+        return (String) get("last_ip");
+    }
+
+    public void lastIp(String lastIp) {
+        set("last_ip", lastIp);
+    }
+
+    public boolean status() {
+        return Boolean.TRUE.equals(get("status"));
+    }
+
+    public void status(boolean status) {
+        set("status", status);
+    }
+
+    public long profileNodeId() {
+        return (Long) get("profile_node_id");
+    }
+
+    public void profileNodeId(long profileNodeId) {
+        set("profile_node_id", profileNodeId);
+    }
+
+    public String settings() {
+        return (String) get("settings");
+    }
+
+    public void settings(String settings) {
+        set("settings", settings);
+    }
+
+    public String domen() {
+        return (String) get("domen");
+    }
+
+    public void domen(String domen) {
+        set("domen", domen);
+    }
 }

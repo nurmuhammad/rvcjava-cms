@@ -1,6 +1,5 @@
 package rvc.cms;
 
-import org.eclipse.jetty.http.MetaData;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.h2.tools.Server;
@@ -43,7 +42,7 @@ public class Main {
         rvcServer.before("administer, administer/*", () -> {
             User user = Session.get().attribute("user");
 
-            if (user==null){
+            if (user == null) {
                 Response.get().redirect("/login");
             }
         });
@@ -61,8 +60,8 @@ public class Main {
             Database.open();
             User user = User.findFirst("email=?", email);
             Database.close();
-            if(user!=null){
-                if(Application.instalce.passwordEncoder.matches(password, (String)user.get("password"))){
+            if (user != null) {
+                if ($.matches(password, user.password()) && user.status()) {
                     Session.get().attribute("user", user);
                     Response.get().redirect("/administer");
                 }
@@ -72,6 +71,8 @@ public class Main {
             return null;
         });
 
+
+        // h2 db-manager server
         if (Application.debug()) {
             Server webServer = Server.createWebServer("-webAllowOthers", "-webPort", "8083").start();
         }

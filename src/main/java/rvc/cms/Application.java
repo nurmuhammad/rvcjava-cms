@@ -1,11 +1,9 @@
 package rvc.cms;
 
-import crypt.BCrypt;
 import crypt.BCryptPasswordEncoder;
 import org.slf4j.bridge.SLF4JBridgeHandler;
 import rvc.cms.init.Config;
 import rvc.cms.model.User;
-import rvc.cms.model.aModel;
 
 /**
  * @author nurmuhammad
@@ -30,10 +28,10 @@ public class Application {
             user = new User();
             user.set(
                     "email", "admin",
-                    "password", passwordEncoder.encode("1"),
+                    "password", $.encode("1"),
                     "roles", "admin",
-                    "created", aModel.timestamp(),
-                    "changed", aModel.timestamp(),
+                    "created", $.timestamp(),
+                    "changed", $.timestamp(),
                     "status", true,
                     "domen", "*"
             );
@@ -45,7 +43,5 @@ public class Application {
     public static boolean debug() {
         return instalce.debug;
     }
-
-    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 }
