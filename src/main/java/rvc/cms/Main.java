@@ -1,7 +1,8 @@
 package rvc.cms;
 
 import org.h2.tools.Server;
-import rvc.*;
+import rvc.ModelAndView;
+import rvc.RvcServer;
 import rvc.cms.init.Config;
 import rvc.cms.model.User;
 import rvc.http.Request;

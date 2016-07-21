@@ -1,26 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
-  <component name="FacetManager">
-    <facet type="Osmorc" name="OSGi">
-      <configuration manifestGenerationMode="OsmorcControlled" manifestLocation="" jarfileLocation="rvcjava-cms-0.1-SNAPSHOT.jar" outputPathType="CompilerOutputPath" bndFileLocation="" bundlorFileLocation="" bundleActivator="" bundleSymbolicName="com.rvcjava.cms" bundleVersion="0.1.0.SNAPSHOT" ignoreFilePattern="" useProjectDefaultManifestFileLocation="true" alwaysRebuildBundleJAR="false" doNotSynchronizeWithMaven="false">
-        <additionalProperties>
-          <property key="Bundle-Description" value="Simpple RVC CMSFramework" />
-          <property key="Bundle-Name" value="RVC CMS" />
-          <property key="Include-Resource" value="rvc.cms/Widgetset.gwt.xml=$MODULE_DIR$/src/main/resources/rvc.cms/Widgetset.gwt.xml,VAADIN/themes/admin/addons.scss=$MODULE_DIR$/src/main/resources/VAADIN/themes/admin/addons.scss,VAADIN/themes/admin/fonts/Vaadin-Icons.eot=$MODULE_DIR$/src/main/resources/VAADIN/themes/admin/fonts/Vaadin-Icons.eot,VAADIN/themes/admin/fonts/Vaadin-Icons.svg=$MODULE_DIR$/src/main/resources/VAADIN/themes/admin/fonts/Vaadin-Icons.svg,VAADIN/themes/admin/fonts/Vaadin-Icons.ttf=$MODULE_DIR$/src/main/resources/VAADIN/themes/admin/fonts/Vaadin-Icons.ttf,VAADIN/themes/admin/fonts/Vaadin-Icons.woff=$MODULE_DIR$/src/main/resources/VAADIN/themes/admin/fonts/Vaadin-Icons.woff,VAADIN/themes/admin/logo.png=$MODULE_DIR$/src/main/resources/VAADIN/themes/admin/logo.png,VAADIN/themes/admin/styles.css=$MODULE_DIR$/src/main/resources/VAADIN/themes/admin/styles.css,VAADIN/themes/admin/styles.scss=$MODULE_DIR$/src/main/resources/VAADIN/themes/admin/styles.scss" />
-        </additionalProperties>
-        <additionalJARContents />
-      </configuration>
-    </facet>
-    <facet type="gwt" name="GWT">
-      <configuration>
-        <setting name="additionalCompilerParameters" value="-Xss1024k" />
-        <setting name="compilerMaxHeapSize" value="512" />
-        <setting name="gwtScriptOutputStyle" value="OBF" />
-        <setting name="gwtSdkUrl" value="file://C:\Users\Nurmuhammad\.m2\repository/com/vaadin/vaadin-client/7.6.8" />
-        <setting name="gwtSdkType" value="Vaadin-Maven" />
-      </configuration>
-    </facet>
-  </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />

@@ -4,8 +4,6 @@ import org.javalite.activejdbc.Model;
 import org.javalite.activejdbc.annotations.BelongsTo;
 import org.javalite.activejdbc.annotations.BelongsToParents;
 
-import java.util.Map;
-
 /**
  * @author nurmuhammad
  */

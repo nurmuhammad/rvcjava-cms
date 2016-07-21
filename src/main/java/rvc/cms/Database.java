@@ -7,9 +7,7 @@ import org.h2.tools.Script;
 import org.javalite.activejdbc.Base;
 import rvc.cms.init.Config;
 
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 /**
  * @author nurmuhammad
