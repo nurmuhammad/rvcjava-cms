@@ -20,6 +20,8 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
+        Database.backupSql();
+
         RvcServer rvcServer = new RvcServer();
 
         rvcServer.port(Config.get("server.port", 4567));
@@ -41,13 +43,10 @@ public class Main {
 
         rvcServer.before("administer, administer/*", () -> {
             User user = Session.get().attribute("user");
-
             if (user == null) {
                 Response.get().redirect("/login");
             }
         });
-
-        new Thread(() -> rvcServer.start()).start();
 
         rvcServer.get("login", () -> {
             ModelAndView modelAndView = new ModelAndView(null, "login.html");
@@ -71,6 +70,7 @@ public class Main {
             return null;
         });
 
+        new Thread(() -> rvcServer.start()).start();
 
         // h2 db-manager server
         if (Application.debug()) {

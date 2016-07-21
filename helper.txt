@@ -1,0 +1,21 @@
+node:
+	fields:
+		field:
+			name: "title"
+			sql:
+				column: "title"
+				type: "varchar"
+			html:
+				widget: "input"
+				type: "text"
+				title: "title"
+				value: ""
+		field:
+			name: ""
+			sql:
+				column:
+				type:
+			html:
+				widget:
+				value:
+					

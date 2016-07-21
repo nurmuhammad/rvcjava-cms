@@ -1,6 +1,5 @@
 package rvc.cms;
 
-import crypt.BCryptPasswordEncoder;
 import org.slf4j.bridge.SLF4JBridgeHandler;
 import rvc.cms.init.Config;
 import rvc.cms.model.User;
