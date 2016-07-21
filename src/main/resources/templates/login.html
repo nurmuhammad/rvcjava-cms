@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block title %} Login page {% endblock %}
+
+{% block content %}
+<div>
+    <form method="post" action="/login">
+        <input type="text" name="email" placeholder="E-mail"/><br/>
+        <input type="password" name="password" autocomplete="false" placeholder="Password"/><br/>
+        <input type="submit" name="submit" value="Sign in"/>
+
+        <input type="checkbox" id="remember-me" name="remember-me" size="30" value="remember-me"/>
+        <label for="remember-me">Remember me</label>
+
+    </form>
+</div>
+{% endblock %}

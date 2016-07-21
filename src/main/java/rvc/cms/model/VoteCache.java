@@ -1,5 +1,6 @@
 package rvc.cms.model;
 
+import org.javalite.activejdbc.annotations.BelongsTo;
 import org.javalite.activejdbc.annotations.Table;
 
 /**
@@ -7,7 +8,8 @@ import org.javalite.activejdbc.annotations.Table;
  */
 
 @Table("votes_cache")
-public class VoteCache extends aModel{
+@BelongsTo(parent = Node.class, foreignKeyName = "node_id")
+public class VoteCache extends aModel {
     public long id;
     public long nodeId;
     public double value;

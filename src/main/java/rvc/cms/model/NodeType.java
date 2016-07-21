@@ -1,7 +1,5 @@
 package rvc.cms.model;
 
-import java.util.ArrayList;
-
 /**
  * @author nurmuhammad
  */

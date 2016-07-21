@@ -1,11 +1,12 @@
 package rvc.cms.model;
 
-import java.util.ArrayList;
+import org.javalite.activejdbc.annotations.BelongsTo;
 
 /**
  * @author nurmuhammad
  */
 
+@BelongsTo(parent = User.class, foreignKeyName = "user_id")
 public class Node extends aModel {
 
     public long id;
@@ -17,6 +18,4 @@ public class Node extends aModel {
 
     public String settings;
     public String domen;
-
-    public ArrayList<Field> fields;
 }

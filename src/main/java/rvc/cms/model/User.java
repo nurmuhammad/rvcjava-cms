@@ -1,11 +1,13 @@
 package rvc.cms.model;
 
 import org.javalite.activejdbc.Model;
+import org.javalite.activejdbc.annotations.BelongsTo;
 
 /**
  * @author nurmuhammad
  */
 
+@BelongsTo(parent = Node.class, foreignKeyName = "profile_node_id")
 public class User extends Model {
     public long id;
     public String roles;
@@ -13,7 +15,7 @@ public class User extends Model {
     public String password;
 
     public long created;
-    public long chaged;
+    public long changed;
 
     public int lastLogin;
     public String lastIp;

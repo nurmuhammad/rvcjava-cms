@@ -9,5 +9,7 @@ import java.io.Serializable;
  */
 
 public abstract class aModel extends Model implements Serializable {
-
+    public static int timestamp() {
+        return (int) (System.currentTimeMillis() / 1000);
+    }
 }

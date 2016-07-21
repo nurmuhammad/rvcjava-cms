@@ -1,11 +1,16 @@
 package rvc.cms.model;
 
+import org.javalite.activejdbc.annotations.BelongsTo;
+import org.javalite.activejdbc.annotations.BelongsToParents;
+
 import java.util.Map;
 
 /**
  * @author nurmuhammad
  */
-
+@BelongsToParents({
+        @BelongsTo(parent = NodeType.class, foreignKeyName = "node_type_id")
+})
 public class FieldType extends aModel {
     public long id;
     public long nodeTypeId;

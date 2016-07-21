@@ -28,7 +28,7 @@ public class Pebble extends TemplateEngine {
 
     public Pebble() {
         ArrayList list = new ArrayList();
-//        list.add(new ClasspathLoader());
+        list.add(new ClasspathLoader());
         FileLoader fileLoader = new FileLoader();
         fileLoader.setPrefix(Config.get("template.dir", ""));
         list.add(fileLoader);
@@ -37,6 +37,7 @@ public class Pebble extends TemplateEngine {
 
         engine = new PebbleEngine
                 .Builder()
+                .cacheActive(!Application.debug())
                 .loader(loader)
                 .build();
     }

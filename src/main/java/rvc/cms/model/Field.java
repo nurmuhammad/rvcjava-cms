@@ -1,9 +1,16 @@
 package rvc.cms.model;
 
+import org.javalite.activejdbc.annotations.BelongsTo;
+import org.javalite.activejdbc.annotations.BelongsToParents;
+
 /**
  * @author nurmuhammad
  */
 
+@BelongsToParents({
+    @BelongsTo(parent = User.class, foreignKeyName = "user_id"),
+    @BelongsTo(parent = Node.class, foreignKeyName = "node_id")
+})
 public class Field extends aModel {
 
     public long id;

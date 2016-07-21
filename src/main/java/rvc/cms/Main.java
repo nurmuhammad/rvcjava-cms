@@ -1,20 +1,17 @@
 package rvc.cms;
 
+import org.eclipse.jetty.http.MetaData;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
-import org.h2.tools.Console;
 import org.h2.tools.Server;
-import org.javalite.activejdbc.Base;
-import org.mapdb.Atomic;
 import rvc.*;
 import rvc.cms.admin.AdminServlet;
 import rvc.cms.admin.AdminUI;
 import rvc.cms.init.Config;
 import rvc.cms.model.User;
+import rvc.http.Request;
 import rvc.http.Response;
 import rvc.http.Session;
-
-import java.util.Date;
 
 /**
  * @author nurmuhammad
@@ -23,7 +20,6 @@ import java.util.Date;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        boolean debug = Boolean.valueOf(Config.get("debug.mode", "false"));
 
         RvcServer rvcServer = new RvcServer();
 
@@ -40,41 +36,43 @@ public class Main {
         rvcHandler.addServlet(sh, "/administer/*");
         rvcHandler.addServlet(sh, "/VAADIN/*");
         rvcHandler.setInitParameter("ui", AdminUI.class.getCanonicalName());
-        rvcHandler.setInitParameter("productionMode", "" + (!debug));
+        rvcHandler.setInitParameter("productionMode", "" + (!Application.debug()));
         rvcHandler.setInitParameter("theme", "admin");
         rvcHandler.setInitParameter("widgetset", "rvc.cms.Widgetset");
 
         rvcServer.before("administer, administer/*", () -> {
-            Object o = Session.get().attribute("user");
-//            Response.get().redirect("/login");
+            User user = Session.get().attribute("user");
+
+            if (user==null){
+                Response.get().redirect("/login");
+            }
         });
 
         new Thread(() -> rvcServer.start()).start();
 
         rvcServer.get("login", () -> {
-
-            Database.open();
-
-            int i = 0;
-            long l = System.currentTimeMillis();
-            while (true) {
-                User user = new User();
-                user.set("email", "email@email.com", "roles", "admin, moderate", "created", new Date().getTime() / 1000);
-                user.saveIt();
-                if (i++ > 10000) {
-                    break;
-                }
-            }
-            System.out.println(System.currentTimeMillis() - l);
-
-            Database.close();
-
-            ModelAndView modelAndView = new ModelAndView(null, "home.html");
+            ModelAndView modelAndView = new ModelAndView(null, "login.html");
             return modelAndView;
         }, Pebble.instance);
 
+        rvcServer.post("login", () -> {
+            String email = Request.get().queryParams("email");
+            String password = Request.get().queryParams("password");
+            Database.open();
+            User user = User.findFirst("email=?", email);
+            Database.close();
+            if(user!=null){
+                if(Application.instalce.passwordEncoder.matches(password, (String)user.get("password"))){
+                    Session.get().attribute("user", user);
+                    Response.get().redirect("/administer");
+                }
+            } else {
+                Response.get().redirect("/login");
+            }
+            return null;
+        });
 
-        if (debug) {
+        if (Application.debug()) {
             Server webServer = Server.createWebServer("-webAllowOthers", "-webPort", "8083").start();
         }
 
