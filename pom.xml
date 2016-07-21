@@ -21,44 +21,25 @@
         </license>
     </licenses>
 
-	<properties>
+    <properties>
         <jdk.version>1.8</jdk.version>
         <slf4j.version>1.7.13</slf4j.version>
         <h2.version>1.4.191</h2.version>
-        <sql2o.version>1.5.4</sql2o.version>
-        <vaadin.version>7.6.8</vaadin.version>
-        <vaadin.plugin.version>${vaadin.version}</vaadin.plugin.version>
         <pebble.version>2.2.2</pebble.version>
     </properties>
 
     <repositories>
-        <repository>
-            <id>vaadin-addons</id>
-            <url>http://maven.vaadin.com/vaadin-addons</url>
-        </repository>
         <repository>
             <id>javalite-activejdbc</id>
             <url>https://mvnrepository.com/artifact/org.javalite/activejdbc</url>
         </repository>
     </repositories>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-bom</artifactId>
-                <version>${vaadin.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <dependencies>
-	
-		<dependency>
+
+        <dependency>
             <groupId>com.rvcjava</groupId>
-			<artifactId>rvcjava</artifactId>
+            <artifactId>rvcjava</artifactId>
             <version>0.1-SNAPSHOT</version>
         </dependency>
 
@@ -69,10 +50,10 @@
         </dependency>
 
         <dependency>
-			<groupId>com.mitchellbosecke</groupId>
-			<artifactId>pebble</artifactId>
-			<version>${pebble.version}</version>
-		</dependency>
+            <groupId>com.mitchellbosecke</groupId>
+            <artifactId>pebble</artifactId>
+            <version>${pebble.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.javalite</groupId>
@@ -98,7 +79,6 @@
             <version>2.2.2</version>
         </dependency>
 
-
         <dependency>
             <groupId>org.xeustechnologies</groupId>
             <artifactId>jcl-core</artifactId>
@@ -111,63 +91,13 @@
             <version>3.20.0-GA</version>
         </dependency>
 
-        <!-- VAADIN dependencies -->
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-server</artifactId>
-        </dependency>
-        <!--<dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-push</artifactId>
-        </dependency>-->
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-client</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <!--
-		  Needed when using the widgetset optimizer (custom ConnectorBundleLoaderFactory).
-
-		  For widgetset compilation, vaadin-client-compiler is automatically added on the
-		  compilation classpath by vaadin-maven-plugin so normally there is no need for an
-		  explicit dependency.
-		-->
-        <!--
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-client-compiler</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        -->
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-themes</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.vaadin.addons</groupId>
-            <artifactId>aceeditor</artifactId>
-            <version>0.8.14</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jul-to-slf4j</artifactId>
-            <version>1.7.21</version>
-        </dependency>
-
-
     </dependencies>
 
     <build>
-
         <resources>
             <resource>
                 <filtering>false</filtering>
                 <directory>src/main/resources</directory>
-                <excludes>
-                    <exclude>**/*.gwt.xml</exclude>
-                </excludes>
             </resource>
             <resource>
                 <filtering>false</filtering>
@@ -207,74 +137,6 @@
                 </executions>
             </plugin>
 
-            <plugin>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-maven-plugin</artifactId>
-                <version>${vaadin.plugin.version}</version>
-                <configuration>
-                    <extraJvmArgs>-Xmx512M -Xss1024k</extraJvmArgs>
-                    <webappDirectory>${basedir}/target/classes/VAADIN/widgetsets</webappDirectory>
-                    <draftCompile>false</draftCompile>
-                    <compileReport>false</compileReport>
-                    <style>OBF</style>
-                    <strict>true</strict>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>update-theme</goal>
-                            <goal>update-widgetset</goal>
-                            <goal>compile</goal>
-                            <!-- Comment out compile-theme goal to use on-the-fly theme compilation -->
-                            <goal>compile-theme</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>2.4</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-clean-plugin</artifactId>
-                <version>2.6.1</version>
-                <!-- Clean up also any pre-compiled themes -->
-                <configuration>
-                    <filesets>
-                        <fileset>
-                            <directory>src/main/webapp/VAADIN/themes</directory>
-                            <includes>
-                                <include>**/styles.css</include>
-                                <include>**/styles.scss.cache</include>
-                            </includes>
-                        </fileset>
-                    </filesets>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.2.1</version>
-                <executions>
-                    <execution>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>java</goal>
-                        </goals>
-                        <configuration>
-                            <classpathScope>compile</classpathScope>
-                            <mainClass>com.vaadin.sass.SassCompiler</mainClass>
-                            <arguments>
-                                <argument>src/main/resources/VAADIN/themes/admin/styles.scss</argument>
-                                <argument>src/main/resources/VAADIN/themes/admin/styles.css</argument>
-                            </arguments>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
 
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
@@ -301,7 +163,6 @@
                         </goals>
                     </execution>
                 </executions>
-
             </plugin>
 
         </plugins>

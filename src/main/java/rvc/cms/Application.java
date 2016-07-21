@@ -1,6 +1,5 @@
 package rvc.cms;
 
-import org.slf4j.bridge.SLF4JBridgeHandler;
 import rvc.cms.init.Config;
 import rvc.cms.model.User;
 
@@ -9,10 +8,6 @@ import rvc.cms.model.User;
  */
 
 public class Application {
-
-    static {
-        SLF4JBridgeHandler.install();
-    }
 
     boolean debug;
 
