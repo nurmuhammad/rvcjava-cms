@@ -3,6 +3,7 @@ package rvc.cms;
 import org.h2.tools.Server;
 import rvc.ModelAndView;
 import rvc.RvcServer;
+import rvc.ann.Template;
 import rvc.cms.init.Config;
 import rvc.cms.model.User;
 import rvc.http.Request;
@@ -19,13 +20,15 @@ public class Main {
 
         Database.backupSql();
 
-        RvcServer rvcServer = new RvcServer();
+        RvcServer rvcServer = new RvcServer()
+                .addTemplate(Template.TemplateEngine.PEBBLE, Pebble.instance);
 
         rvcServer.port(Config.get("server.port", 4567));
 
         rvcServer.init();
+        rvcServer.classes(UserController.class);
 
-        rvcServer.before("administer, administer/*", () -> {
+        /* rvcServer.before("administer, administer/*", () -> {
             User user = Session.get().attribute("user");
             if (user == null) {
                 Response.get().redirect("/login");
@@ -52,7 +55,7 @@ public class Main {
                 Response.get().redirect("/login");
             }
             return null;
-        });
+        });*/
 
         new Thread(() -> rvcServer.start()).start();
 
