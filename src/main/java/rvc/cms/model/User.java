@@ -1,6 +1,5 @@
 package rvc.cms.model;
 
-import org.javalite.activejdbc.Model;
 import org.javalite.activejdbc.annotations.BelongsTo;
 
 /**
@@ -8,7 +7,7 @@ import org.javalite.activejdbc.annotations.BelongsTo;
  */
 
 @BelongsTo(parent = Node.class, foreignKeyName = "profile_node_id")
-public class User extends Settings  {
+public class User extends SettingsModel {
 
     public Long id() {
         return (Long) get("id");

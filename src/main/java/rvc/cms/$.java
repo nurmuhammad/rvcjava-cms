@@ -75,13 +75,13 @@ public class $ {
         return Context.get(type);
     }
 
-    public static Map<String, String> settings2map(String settins) {
-        if (settins == null) return new HashMap<>();
-        return Splitter.on("; ").withKeyValueSeparator(":=").split(settins);
+    public static Map<String, String> settings2map(String settings) {
+        if (settings == null || settings.length() < 2) return new HashMap<>();
+        return Splitter.on("; ").withKeyValueSeparator(":=").split(settings);
     }
 
     public static String map2settings(Map map) {
-        if(map==null) return "";
+        if (map == null) return "";
         Joiner.MapJoiner mapJoiner = Joiner.on("; ").withKeyValueSeparator(":=");
         return mapJoiner.join(map);
     }

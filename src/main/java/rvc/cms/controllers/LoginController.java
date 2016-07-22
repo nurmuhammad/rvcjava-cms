@@ -55,10 +55,7 @@ public class LoginController {
         Database.open();
         Object result = User.findAll().toJson(true);
         User user = User.findFirst("email=?", "admin");
-        user.setting(""+System.nanoTime(), UUID.randomUUID().toString());
-        user.setting(""+System.nanoTime(), UUID.randomUUID().toString());
-        user.setting(""+System.nanoTime(), UUID.randomUUID().toString());
-        user.setting(""+System.nanoTime(), UUID.randomUUID().toString());
+        user.setting("" + System.nanoTime(), UUID.randomUUID().toString());
         user.saveIt();
         Database.close();
         return result;

@@ -1,12 +1,10 @@
 package rvc.cms.model;
 
-import org.javalite.activejdbc.Model;
-
 /**
  * @author nurmuhammad
  */
 
-public class Variable extends Settings {
+public class Variable extends SettingsModel {
 
     public Long id() {
         return (Long) get("id");

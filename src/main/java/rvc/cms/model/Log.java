@@ -1,11 +1,9 @@
 package rvc.cms.model;
 
-import org.javalite.activejdbc.Model;
-
 /**
  * @author nurmuhammad
  */
-public class Log extends Settings {
+public class Log extends SettingsModel {
 
     public Long id() {
         return (Long) get("id");

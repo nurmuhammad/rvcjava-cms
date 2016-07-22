@@ -10,7 +10,7 @@ import org.javalite.activejdbc.annotations.Table;
 
 @Table("votes_cache")
 @BelongsTo(parent = Node.class, foreignKeyName = "node_id")
-public class VoteCache extends Model {
+public class VoteCache extends aModel {
 
     public Long id() {
         return (Long) get("id");

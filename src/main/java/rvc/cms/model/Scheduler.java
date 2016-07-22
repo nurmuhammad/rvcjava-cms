@@ -13,7 +13,7 @@ import org.javalite.activejdbc.annotations.Table;
         @BelongsTo(parent = Node.class, foreignKeyName = "node_id"),
         @BelongsTo(parent = Objects.class, foreignKeyName = "object_id")
 })
-public class Scheduler extends Settings {
+public class Scheduler extends SettingsModel {
 
     public Long id() {
         return (Long) get("id");

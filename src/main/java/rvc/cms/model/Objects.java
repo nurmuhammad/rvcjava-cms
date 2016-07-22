@@ -7,7 +7,7 @@ import org.javalite.activejdbc.annotations.Table;
  */
 
 @Table("objects")
-public class Objects extends Settings {
+public class Objects extends SettingsModel {
 
     public Long id() {
         return (Long) get("id");

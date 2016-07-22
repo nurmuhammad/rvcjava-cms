@@ -1,6 +1,5 @@
 package rvc.cms.model;
 
-import org.javalite.activejdbc.Model;
 import org.javalite.activejdbc.annotations.BelongsTo;
 import org.javalite.activejdbc.annotations.BelongsToParents;
 import org.javalite.activejdbc.annotations.Table;
@@ -14,7 +13,7 @@ import org.javalite.activejdbc.annotations.Table;
         @BelongsTo(parent = Node.class, foreignKeyName = "node_id"),
         @BelongsTo(parent = Node.class, foreignKeyName = "releated_node_id")
 })
-public class Node2Node extends Settings {
+public class Node2Node extends SettingsModel {
 
     public Long nodeId() {
         return (Long) get("node_id");

@@ -6,7 +6,7 @@ import org.javalite.activejdbc.Model;
  * @author nurmuhammad
  */
 
-public class Translate extends Model {
+public class Translate extends aModel {
 
     public Long id() {
         return (Long) get("id");

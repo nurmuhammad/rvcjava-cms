@@ -11,7 +11,7 @@ import org.javalite.activejdbc.annotations.BelongsToParents;
         @BelongsTo(parent = User.class, foreignKeyName = "user_id"),
         @BelongsTo(parent = Node.class, foreignKeyName = "node_id")
 })
-public class Field extends Settings {
+public class Field extends SettingsModel {
 
     public Long id() {
         return (Long) get("id");

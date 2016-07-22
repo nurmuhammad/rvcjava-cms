@@ -4,7 +4,7 @@ package rvc.cms.model;
  * @author nurmuhammad
  */
 
-public class NodeType extends Settings {
+public class NodeType extends SettingsModel {
 
     public Long id() {
         return (Long) get("id");

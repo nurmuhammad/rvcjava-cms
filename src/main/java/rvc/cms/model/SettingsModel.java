@@ -1,6 +1,5 @@
 package rvc.cms.model;
 
-import org.javalite.activejdbc.Model;
 import rvc.cms.$;
 
 import java.util.HashMap;
@@ -10,7 +9,7 @@ import java.util.Map;
  * @author nurmuhammad
  */
 
-public abstract class Settings extends Model {
+public abstract class SettingsModel extends aModel {
     Map<String, String> settings;
 
     public String settings() {

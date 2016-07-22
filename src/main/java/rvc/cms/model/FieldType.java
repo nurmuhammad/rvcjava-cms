@@ -9,7 +9,7 @@ import org.javalite.activejdbc.annotations.BelongsToParents;
 @BelongsToParents({
         @BelongsTo(parent = NodeType.class, foreignKeyName = "node_type_id")
 })
-public class FieldType extends Settings{
+public class FieldType extends SettingsModel {
 
     public Long id() {
         return (Long) get("id");
