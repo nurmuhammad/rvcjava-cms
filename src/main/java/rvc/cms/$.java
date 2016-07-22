@@ -1,6 +1,8 @@
 package rvc.cms;
 
 import com.google.common.base.Charsets;
+import com.google.common.base.Joiner;
+import com.google.common.base.Splitter;
 import com.google.common.hash.HashCode;
 import com.google.common.hash.HashFunction;
 import com.google.common.hash.Hashing;
@@ -8,10 +10,7 @@ import crypt.BCryptPasswordEncoder;
 import rvc.Context;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Base64;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author nurmuhammad
@@ -74,5 +73,16 @@ public class $ {
 
     public static <T> T get(Class<T> type) {
         return Context.get(type);
+    }
+
+    public static Map<String, String> settings2map(String settins) {
+        if (settins == null) return new HashMap<>();
+        return Splitter.on("; ").withKeyValueSeparator(":=").split(settins);
+    }
+
+    public static String map2settings(Map map) {
+        if(map==null) return "";
+        Joiner.MapJoiner mapJoiner = Joiner.on("; ").withKeyValueSeparator(":=");
+        return mapJoiner.join(map);
     }
 }

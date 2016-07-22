@@ -17,7 +17,7 @@ public class Translate extends Model {
     }
 
     public String source() {
-        return (String) get("source");
+        return getString("source");
     }
 
     public void source(String source) {
@@ -25,7 +25,7 @@ public class Translate extends Model {
     }
 
     public String translate() {
-        return (String) get("translate");
+        return getString("translate");
     }
 
     public void translate(String translate) {

@@ -1,6 +1,5 @@
 package rvc.cms.model;
 
-import org.javalite.activejdbc.Model;
 import org.javalite.activejdbc.annotations.BelongsTo;
 import org.javalite.activejdbc.annotations.BelongsToParents;
 
@@ -10,7 +9,7 @@ import org.javalite.activejdbc.annotations.BelongsToParents;
 @BelongsToParents({
         @BelongsTo(parent = NodeType.class, foreignKeyName = "node_type_id")
 })
-public class FieldType extends Model {
+public class FieldType extends Settings{
 
     public Long id() {
         return (Long) get("id");
@@ -76,16 +75,8 @@ public class FieldType extends Model {
         set("sort", sort);
     }
 
-    public String settings() {
-        return (String) get("settings");
-    }
-
-    public void settings(String settings) {
-        set("settings", settings);
-    }
-
     public String renderCode() {
-        return (String) get("render_code");
+        return getString("render_code");
     }
 
     public void renderCode(String renderCode) {
@@ -93,7 +84,7 @@ public class FieldType extends Model {
     }
 
     public String validationCode() {
-        return (String) get("validation_code");
+        return getString("validation_code");
     }
 
     public void validationCode(String validationCode) {
@@ -101,7 +92,7 @@ public class FieldType extends Model {
     }
 
     public String returnCode() {
-        return (String) get("return_code");
+        return getString("return_code");
     }
 
     public void returnCode(String returnCode) {

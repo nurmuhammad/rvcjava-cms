@@ -6,7 +6,7 @@ import org.javalite.activejdbc.Model;
  * @author nurmuhammad
  */
 
-public class Variable extends Model {
+public class Variable extends Settings {
 
     public Long id() {
         return (Long) get("id");
@@ -24,11 +24,11 @@ public class Variable extends Model {
         set("key", key);
     }
 
-    public Object value() {
-        return get("value");
+    public byte[] value() {
+        return getBytes("value");
     }
 
-    public void value(Object value) {
+    public void value(byte[] value) {
         set("value", value);
     }
 
@@ -38,14 +38,6 @@ public class Variable extends Model {
 
     public void type(String type) {
         set("type", type);
-    }
-
-    public String settings() {
-        return (String) get("settings");
-    }
-
-    public void settings(String settings) {
-        set("settings", settings);
     }
 
     public Integer created() {

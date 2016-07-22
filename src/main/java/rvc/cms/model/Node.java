@@ -8,7 +8,7 @@ import org.javalite.activejdbc.annotations.BelongsTo;
  */
 
 @BelongsTo(parent = User.class, foreignKeyName = "user_id")
-public class Node extends Model {
+public class Node extends Settings {
 
     public Long id() {
         return (Long) get("id");
@@ -56,14 +56,6 @@ public class Node extends Model {
 
     public void status(boolean status) {
         set("status", status);
-    }
-
-    public String settings() {
-        return (String) get("settings");
-    }
-
-    public void settings(String settings) {
-        set("settings", settings);
     }
 
     public String domen() {

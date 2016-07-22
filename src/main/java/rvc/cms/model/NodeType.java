@@ -1,12 +1,10 @@
 package rvc.cms.model;
 
-import org.javalite.activejdbc.Model;
-
 /**
  * @author nurmuhammad
  */
 
-public class NodeType extends Model {
+public class NodeType extends Settings {
 
     public Long id() {
         return (Long) get("id");
@@ -54,13 +52,5 @@ public class NodeType extends Model {
 
     public void translate(boolean translate) {
         set("translate", translate);
-    }
-
-    public String settings() {
-        return (String) get("settings");
-    }
-
-    public void settings(String settings) {
-        set("settings", settings);
     }
 }

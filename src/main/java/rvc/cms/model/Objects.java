@@ -1,6 +1,5 @@
 package rvc.cms.model;
 
-import org.javalite.activejdbc.Model;
 import org.javalite.activejdbc.annotations.Table;
 
 /**
@@ -8,7 +7,7 @@ import org.javalite.activejdbc.annotations.Table;
  */
 
 @Table("objects")
-public class Objects extends Model {
+public class Objects extends Settings {
 
     public Long id() {
         return (Long) get("id");
@@ -27,7 +26,7 @@ public class Objects extends Model {
     }
 
     public String description() {
-        return (String) get("description");
+        return getString("description");
     }
 
     public void description(String description) {
@@ -43,18 +42,10 @@ public class Objects extends Model {
     }
 
     public String javaCode() {
-        return (String) get("java_code");
+        return getString("java_code");
     }
 
     public void javaCode(String javaCode) {
         set("java_code", javaCode);
-    }
-
-    public String settings() {
-        return (String) get("settings");
-    }
-
-    public void settings(String settings) {
-        set("settings", settings);
     }
 }

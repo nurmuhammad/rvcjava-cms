@@ -14,7 +14,7 @@ import org.javalite.activejdbc.annotations.Table;
         @BelongsTo(parent = Node.class, foreignKeyName = "node_id"),
         @BelongsTo(parent = Node.class, foreignKeyName = "releated_node_id")
 })
-public class Node2Node extends Model {
+public class Node2Node extends Settings {
 
     public Long nodeId() {
         return (Long) get("node_id");
@@ -30,14 +30,6 @@ public class Node2Node extends Model {
 
     public void releatedNodeId(Long releatedNodeId) {
         set("node_releated_id", releatedNodeId);
-    }
-
-    public String settings() {
-        return (String) get("settings");
-    }
-
-    public void settings(String settings) {
-        set("settings", settings);
     }
 
     public Integer value() {

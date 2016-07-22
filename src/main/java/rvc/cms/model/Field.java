@@ -1,6 +1,5 @@
 package rvc.cms.model;
 
-import org.javalite.activejdbc.Model;
 import org.javalite.activejdbc.annotations.BelongsTo;
 import org.javalite.activejdbc.annotations.BelongsToParents;
 
@@ -12,7 +11,7 @@ import org.javalite.activejdbc.annotations.BelongsToParents;
         @BelongsTo(parent = User.class, foreignKeyName = "user_id"),
         @BelongsTo(parent = Node.class, foreignKeyName = "node_id")
 })
-public class Field extends Model {
+public class Field extends Settings {
 
     public Long id() {
         return (Long) get("id");
@@ -60,14 +59,6 @@ public class Field extends Model {
 
     public void group(String group) {
         set("group", group);
-    }
-
-    public String settings() {
-        return (String) get("settings");
-    }
-
-    public void settings(String settings) {
-        set("settings", settings);
     }
 
     public Integer sort() {

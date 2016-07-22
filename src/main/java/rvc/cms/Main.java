@@ -3,6 +3,7 @@ package rvc.cms;
 import org.h2.tools.Server;
 import rvc.RvcServer;
 import rvc.ann.Template;
+import rvc.cms.controllers.LoginController;
 import rvc.cms.init.Config;
 
 /**

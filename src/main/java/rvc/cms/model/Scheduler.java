@@ -1,6 +1,5 @@
 package rvc.cms.model;
 
-import org.javalite.activejdbc.Model;
 import org.javalite.activejdbc.annotations.BelongsTo;
 import org.javalite.activejdbc.annotations.BelongsToParents;
 import org.javalite.activejdbc.annotations.Table;
@@ -14,7 +13,7 @@ import org.javalite.activejdbc.annotations.Table;
         @BelongsTo(parent = Node.class, foreignKeyName = "node_id"),
         @BelongsTo(parent = Objects.class, foreignKeyName = "object_id")
 })
-public class Scheduler extends Model {
+public class Scheduler extends Settings {
 
     public Long id() {
         return (Long) get("id");
@@ -41,7 +40,7 @@ public class Scheduler extends Model {
     }
 
     public String text() {
-        return (String) get("text");
+        return getString("text");
     }
 
     public void text(String text) {
@@ -70,13 +69,5 @@ public class Scheduler extends Model {
 
     public void objectId(Long objectId) {
         set("object_id", objectId);
-    }
-
-    public String settings() {
-        return (String) get("settings");
-    }
-
-    public void settings(String settings) {
-        set("settings", settings);
     }
 }

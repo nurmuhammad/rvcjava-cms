@@ -5,7 +5,7 @@ import org.javalite.activejdbc.Model;
 /**
  * @author nurmuhammad
  */
-public class Log extends Model {
+public class Log extends Settings {
 
     public Long id() {
         return (Long) get("id");
@@ -32,19 +32,11 @@ public class Log extends Model {
     }
 
     public String message() {
-        return (String) get("message");
+        return (String) getString("message");
     }
 
     public void message(String message) {
         set("message", message);
-    }
-
-    public String settings() {
-        return (String) get("settings");
-    }
-
-    public void settings(String settings) {
-        set("settings", settings);
     }
 
     public String hostname() {

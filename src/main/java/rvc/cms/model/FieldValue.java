@@ -12,7 +12,7 @@ import org.javalite.activejdbc.annotations.BelongsToParents;
         @BelongsTo(parent = Field.class, foreignKeyName = "field_id"),
         @BelongsTo(parent = Node.class, foreignKeyName = "node_id_value")
 })
-public class FieldValue extends Model {
+public class FieldValue extends Settings{
 
     public Long id() {
         return (Long) get("id");
@@ -47,7 +47,7 @@ public class FieldValue extends Model {
     }
 
     public String valueText() {
-        return (String) get("value_text");
+        return getString("value_text");
     }
 
     public void valueText(String valueText) {
@@ -71,7 +71,7 @@ public class FieldValue extends Model {
     }
 
     public Object valueBlob() {
-        return get("value_blob");
+        return getBytes("value_blob");
     }
 
     public void valueBlob(Object valueBlob) {
@@ -84,14 +84,6 @@ public class FieldValue extends Model {
 
     public void language(String language) {
         set("language", language);
-    }
-
-    public String settings() {
-        return (String) get("settings");
-    }
-
-    public void settings(String settings) {
-        set("settings", settings);
     }
 
     public Integer sort() {
