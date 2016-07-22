@@ -6,14 +6,12 @@ import rvc.http.Request;
 import rvc.http.Response;
 import rvc.http.Session;
 
-import java.util.List;
-
 /**
  * @author nurmuhammad
  */
 
 @Controller
-public class UserController {
+public class LoginController {
 
     @GET
     @Template(viewName = "sign-in")
@@ -41,7 +39,7 @@ public class UserController {
     }
 
     @Before("administer, administer/*")
-    public void before(){
+    public void before() {
         User user = Session.get().attribute("user");
         if (user == null) {
             Response.get().redirect("/login");
@@ -49,7 +47,7 @@ public class UserController {
     }
 
     @GET
-    Object json(){
+    Object json() throws Exception {
         Database.open();
         Object result = User.findAll().toJson(true);
         Database.close();
