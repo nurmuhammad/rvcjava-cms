@@ -26,7 +26,7 @@ public class Main {
         rvcServer.port(Config.get("server.port", 4567));
 
         rvcServer.init();
-        rvcServer.classes(UserController.class);
+        rvcServer.suffix(".html").classes(UserController.class);
 
         /* rvcServer.before("administer, administer/*", () -> {
             User user = Session.get().attribute("user");

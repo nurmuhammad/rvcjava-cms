@@ -6,6 +6,8 @@ import rvc.http.Request;
 import rvc.http.Response;
 import rvc.http.Session;
 
+import java.util.List;
+
 /**
  * @author nurmuhammad
  */
@@ -14,7 +16,7 @@ import rvc.http.Session;
 public class UserController {
 
     @GET
-    @Template(viewName = "login.html")
+    @Template(viewName = "sign-in")
     public Object login() {
         return "";
     }
@@ -44,6 +46,14 @@ public class UserController {
         if (user == null) {
             Response.get().redirect("/login");
         }
+    }
+
+    @GET
+    Object json(){
+        Database.open();
+        Object result = User.findAll().toJson(true);
+        Database.close();
+        return result;
     }
 
 }
