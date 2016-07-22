@@ -8,8 +8,6 @@ import rvc.http.Request;
 import rvc.http.Response;
 import rvc.http.Session;
 
-import java.util.UUID;
-
 /**
  * @author nurmuhammad
  */
@@ -29,15 +27,19 @@ public class LoginController {
         String password = Request.get().queryParams("password");
         Database.open();
         User user = User.findFirst("email=?", email);
-        Database.close();
+
         if (user != null) {
             if ($.matches(password, user.password()) && user.status()) {
                 Session.get().attribute("user", user);
+                user.lastLogin($.timestamp());
+                user.lastIp(Request.get().ip());
+                user.saveIt();
                 Response.get().redirect("/administer");
             }
         } else {
             Response.get().redirect("/login");
         }
+        Database.close();
         return null;
 
     }
@@ -55,7 +57,7 @@ public class LoginController {
         Database.open();
         Object result = User.findAll().toJson(true);
         User user = User.findFirst("email=?", "admin");
-        user.setting("" + System.nanoTime(), UUID.randomUUID().toString());
+        user.settings("");
         user.saveIt();
         Database.close();
         return result;
