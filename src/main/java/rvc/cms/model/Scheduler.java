@@ -1,73 +1,36 @@
 package rvc.cms.model;
 
-import org.javalite.activejdbc.annotations.BelongsTo;
-import org.javalite.activejdbc.annotations.BelongsToParents;
-import org.javalite.activejdbc.annotations.Table;
+import javax.persistence.*;
 
 /**
  * @author nurmuhammad
  */
 
-@Table("scheduler")
-@BelongsToParents({
-        @BelongsTo(parent = Node.class, foreignKeyName = "node_id"),
-        @BelongsTo(parent = Objects.class, foreignKeyName = "object_id")
-})
+@Entity
+@Table(name = "scheduler")
+@Access(AccessType.FIELD)
 public class Scheduler extends SettingsModel {
 
-    public Long id() {
-        return (Long) get("id");
-    }
+    @Column(name = "name")
+    public String name;
 
-    public void id(Long id) {
-        set("id", id);
-    }
+    @Column(name = "run_at")
+    public Long runAt;
 
-    public Integer runAt() {
-        return (Integer) get("run_at");
-    }
+    @Column(name = "last_end_at")
+    public Long lastEndAt;
 
-    public void runAt(Integer runAt) {
-        set("run_at", runAt);
-    }
+    @Lob
+    @Column(name = "action")
+    public String action;
 
-    public Integer lastEndAt() {
-        return (Integer) get("last_end_at");
-    }
+    @Column(name = "type")
+    public String type;
 
-    public void lastEndAt(Integer lastEndAt) {
-        set("last_end_at", lastEndAt);
-    }
+    @Column(name = "node_id")
+    public Long nodeId;
 
-    public String text() {
-        return getString("text");
-    }
+    @Column(name = "object_id")
+    public Long objectId;
 
-    public void text(String text) {
-        set("text", text);
-    }
-
-    public String type() {
-        return (String) get("type");
-    }
-
-    public void type(String type) {
-        set("type", type);
-    }
-
-    public Long nodeId() {
-        return (Long) get("node_id");
-    }
-
-    public void nodeId(Long nodeId) {
-        set("node_id", nodeId);
-    }
-
-    public Long objectId() {
-        return (Long) get("object_id");
-    }
-
-    public void objectId(Long objectId) {
-        set("object_id", objectId);
-    }
 }

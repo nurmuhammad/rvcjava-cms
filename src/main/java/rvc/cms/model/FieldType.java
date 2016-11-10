@@ -1,101 +1,51 @@
 package rvc.cms.model;
 
-import org.javalite.activejdbc.annotations.BelongsTo;
-import org.javalite.activejdbc.annotations.BelongsToParents;
+import javax.persistence.*;
 
 /**
  * @author nurmuhammad
  */
-@BelongsToParents({
-        @BelongsTo(parent = NodeType.class, foreignKeyName = "node_type_id")
-})
+
+@Entity
+@Table(name = "field_types")
+@Access(AccessType.FIELD)
 public class FieldType extends SettingsModel {
 
-    public Long id() {
-        return (Long) get("id");
-    }
+    @Column(name = "node_type_id")
+    public Long nodeTypeId;
 
-    public void id(Long id) {
-        set("id", id);
-    }
+    @Column(name = "label")
+    public String label;
 
-    public long nodeTypeId() {
-        return (Long) get("node_type_id");
-    }
+    @Column(name = "name")
+    public String name;
 
-    public void nodeTypeId(long nodeTypeId) {
-        set("node_type_id", nodeTypeId);
-    }
+    @Column(name = "widget")
+    public String widget;
 
-    public String label() {
-        return (String) get("label");
-    }
+    @Column(name = "type")
+    public String type;
 
-    public void label(String label) {
-        set("label", label);
-    }
+    @Column(name = "required")
+    public Boolean required;
 
-    public String name() {
-        return (String) get("name");
-    }
+    @Column(name = "sort")
+    public Integer sort;
 
-    public void name(String name) {
-        set("name", name);
-    }
+    @Lob
+    @Column(name="render_code")
+    public String renderCode;
 
-    public String widget() {
-        return (String) get("widget");
-    }
+    @Lob
+    @Column(name = "validation_code")
+    public String validationCode;
 
-    public void widget(String widget) {
-        set("widget", widget);
-    }
+    @Lob
+    @Column(name = "return_code")
+    public String returnCode;
 
-    public String type() {
-        return (String) get("type");
-    }
 
-    public void type(String type) {
-        set("type", type);
-    }
-
-    public boolean required() {
-        return (Boolean) get("required");
-    }
-
-    public void required(boolean required) {
-        set("required", required);
-    }
-
-    public Integer sort() {
-        return (Integer) get("sort");
-    }
-
-    public void sort(Integer sort) {
-        set("sort", sort);
-    }
-
-    public String renderCode() {
-        return getString("render_code");
-    }
-
-    public void renderCode(String renderCode) {
-        set("render_code", renderCode);
-    }
-
-    public String validationCode() {
-        return getString("validation_code");
-    }
-
-    public void validationCode(String validationCode) {
-        set("validation_code", validationCode);
-    }
-
-    public String returnCode() {
-        return getString("return_code");
-    }
-
-    public void returnCode(String returnCode) {
-        set("return_code", returnCode);
+    public NodeType nodeType(){
+        return null;
     }
 }

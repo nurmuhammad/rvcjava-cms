@@ -18,4 +18,17 @@ node:
 			html:
 				widget:
 				value:
-					
+
+
+
+http://lewisleo.blogspot.jp/2012/08/programmatically-restart-java.html
+
+Query query = session.createQuery(query);
+query.setReadOnly(true);
+setFetchSize(Integer.MIN_VALUE); //MUST use Integer.MIN_VALUE, other value=fetch all
+ScrollableResults results = query.scroll(ScrollMode.FORWARD_ONLY);
+// iterate over results
+while (results.next()) {
+    Object row = results.get();
+}
+results.close();

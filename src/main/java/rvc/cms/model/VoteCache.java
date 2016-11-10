@@ -1,62 +1,29 @@
 package rvc.cms.model;
 
-import org.javalite.activejdbc.Model;
-import org.javalite.activejdbc.annotations.BelongsTo;
-import org.javalite.activejdbc.annotations.Table;
+import javax.persistence.*;
 
 /**
  * @author nurmuhammad
  */
 
-@Table("votes_cache")
-@BelongsTo(parent = Node.class, foreignKeyName = "node_id")
+@Entity
+@Table(name = "votes_cache")
+@Access(AccessType.FIELD)
 public class VoteCache extends aModel {
 
-    public Long id() {
-        return (Long) get("id");
-    }
+    @Column(name = "node_id")
+    public Long nodeId;
 
-    public void id(Long id) {
-        set("id", id);
-    }
+    @Column(name = "value")
+    public Double value;
 
-    public Long nodeId() {
-        return (Long) get("node_id");
-    }
+    @Column(name = "type", length = 32)
+    public String type;
 
-    public void nodeId(Long nodeId) {
-        set("node_id", nodeId);
-    }
+    @Column(name = "function", length = 16)
+    public String function;
 
-    public Double value() {
-        return (Double)get("value");
-    }
+    @Column(name = "timestamp")
+    public Long timestamp;
 
-    public void value(Double value) {
-        set("value", value);
-    }
-
-    public String type() {
-        return (String) get("type");
-    }
-
-    public void type(String type) {
-        set("type", type);
-    }
-
-    public String function() {
-        return (String) get("function");
-    }
-
-    public void function(String function) {
-        set("function", function);
-    }
-
-    public Integer timestamp() {
-        return (Integer) get("timestamp");
-    }
-
-    public void timestamp(int timestamp) {
-        set("timestamp", timestamp);
-    }
 }

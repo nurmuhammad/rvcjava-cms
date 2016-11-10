@@ -1,95 +1,48 @@
 package rvc.cms.model;
 
-import org.javalite.activejdbc.annotations.BelongsTo;
-import org.javalite.activejdbc.annotations.BelongsToParents;
+import javax.persistence.*;
 
 /**
  * @author nurmuhammad
  */
-@BelongsToParents({
-        @BelongsTo(parent = User.class, foreignKeyName = "user_id"),
-        @BelongsTo(parent = Field.class, foreignKeyName = "field_id"),
-        @BelongsTo(parent = Node.class, foreignKeyName = "node_id_value")
-})
+@Entity
+@Table(name = "field_values")
+@Access(AccessType.FIELD)
 public class FieldValue extends SettingsModel {
 
-    public Long id() {
-        return (Long) get("id");
+    @Column(name = "user_id")
+    public Long userId;
+
+    @Column(name = "field_id")
+    public Long fieldId;
+
+    @Column(name = "node_id_value")
+    public Long nodeIdValue;
+
+    @Lob
+    @Column(name = "value_text")
+    public String valueText;
+
+    @Column(name = "value_int")
+    public Long valueInt;
+
+    @Column(name = "value_double")
+    public Double valueDouble;
+
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @Column(name = "value_blob")
+    public byte[] valueBlob;
+
+    @Column(name = "language")
+    public String language;
+
+    @Column(name = "sort")
+    public Integer sort;
+
+
+    public Node nodeValue(){
+        return null;
     }
 
-    public void id(Long id) {
-        set("id", id);
-    }
-
-    public Long userId() {
-        return (Long) get("user_id");
-    }
-
-    public void userId(Long userId) {
-        set("user_id", userId);
-    }
-
-    public Long fieldId() {
-        return (Long) get("field_id");
-    }
-
-    public void fieldId(long fieldId) {
-        set("field_id", fieldId);
-    }
-
-    public Long nodeIdValue() {
-        return (Long) get("node_id_value");
-    }
-
-    public void nodeIdValue(long nodeIdValue) {
-        set("node_id_value", nodeIdValue);
-    }
-
-    public String valueText() {
-        return getString("value_text");
-    }
-
-    public void valueText(String valueText) {
-        set("value_text", valueText);
-    }
-
-    public Long valueInt() {
-        return (Long) get("value_int");
-    }
-
-    public void valueInt(long valueInt) {
-        set("value_int", valueInt);
-    }
-
-    public Double valueDouble() {
-        return (Double) get("value_double");
-    }
-
-    public void valueDouble(double valueDouble) {
-        set("value_double", valueDouble);
-    }
-
-    public Object valueBlob() {
-        return getBytes("value_blob");
-    }
-
-    public void valueBlob(Object valueBlob) {
-        set("value_blob", valueBlob);
-    }
-
-    public String language() {
-        return (String) get("language");
-    }
-
-    public void language(String language) {
-        set("language", language);
-    }
-
-    public Integer sort() {
-        return (Integer) get("sort");
-    }
-
-    public void sort(Integer sort) {
-        set("sort", sort);
-    }
 }

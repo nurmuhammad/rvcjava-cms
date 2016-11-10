@@ -1,67 +1,40 @@
 package rvc.cms.model;
 
-import org.javalite.activejdbc.annotations.BelongsTo;
+
+import javax.persistence.*;
 
 /**
  * @author nurmuhammad
  */
 
-@BelongsTo(parent = User.class, foreignKeyName = "user_id")
+@Entity
+@Table(name = "nodes")
+@Access(AccessType.FIELD)
 public class Node extends SettingsModel {
 
-    public Long id() {
-        return (Long) get("id");
+    @Column(name = "user_id")
+    public Long userId;
+
+    @Column(name = "node_type_id")
+    public Long nodeTypeId;
+
+    @Column(name = "status")
+    public Boolean status;
+
+    @Column(name = "domain")
+    public String domain;
+
+    public Field field(String fieldName){
+        return null;
     }
 
-    public void id(Long id) {
-        set("id", id);
+    public FieldValue fieldValue(String fieldName){
+        return null;
     }
 
-    public Long userId() {
-        return (Long) get("user_id");
+    public NodeType nodeType(){
+        return null;
     }
 
-    public void userId(Long userId) {
-        set("user_id", userId);
-    }
 
-    public String type() {
-        return (String) get("type");
-    }
-
-    public void type(String type) {
-        set("type", type);
-    }
-
-    public Integer created() {
-        return (Integer) get("created");
-    }
-
-    public void created(Integer created) {
-        set("created", created);
-    }
-
-    public Integer changed() {
-        return (Integer) get("changed");
-    }
-
-    public void changed(Long changed) {
-        set("changed", changed);
-    }
-
-    public boolean status() {
-        return Boolean.TRUE.equals(get("status"));
-    }
-
-    public void status(boolean status) {
-        set("status", status);
-    }
-
-    public String domen() {
-        return (String) get("domen");
-    }
-
-    public void domen(String domen) {
-        set("domen", domen);
-    }
 }

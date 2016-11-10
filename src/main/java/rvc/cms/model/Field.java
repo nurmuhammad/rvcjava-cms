@@ -1,96 +1,52 @@
 package rvc.cms.model;
 
-import org.javalite.activejdbc.annotations.BelongsTo;
-import org.javalite.activejdbc.annotations.BelongsToParents;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * @author nurmuhammad
  */
 
-@BelongsToParents({
-        @BelongsTo(parent = User.class, foreignKeyName = "user_id"),
-        @BelongsTo(parent = Node.class, foreignKeyName = "node_id")
-})
+@Entity
+@Table(name = "fields")
+@Access(AccessType.FIELD)
 public class Field extends SettingsModel {
 
-    public Long id() {
-        return (Long) get("id");
+    @Column(name = "user_id")
+    public Long userId;
+
+    @Column(name = "node_id")
+    public Long nodeId;
+
+    @Column(name = "field_name", length = 255)
+    public String fieldName;
+
+    @Column(name = "field_type_id")
+    public Long fieldTypeId;
+
+    @Column(name = "field_group", length = 32)
+    public String group;
+
+    @Column(name = "sort")
+    public Integer sort;
+
+    @Column(name = "status")
+    public Boolean status;
+
+    public Node node(){
+        return null;
     }
 
-    public void id(Long id) {
-        set("id", id);
+    public FieldType fieldType(){
+        return null;
     }
 
-    public Long userId() {
-        return (Long) get("user_id");
+    public FieldValue fieldValue(){
+        return null;
     }
 
-    public void userId(Long userId) {
-        set("user_id", userId);
-    }
-
-    public Long nodeId() {
-        return (Long) get("node_id");
-    }
-
-    public void nodeId(Long nodeId) {
-        set("node_id", nodeId);
-    }
-
-    public String fieldName() {
-        return (String) get("field_name");
-    }
-
-    public void fieldName(String fieldName) {
-        set("field_name", fieldName);
-    }
-
-    public String type() {
-        return (String) get("type");
-    }
-
-    public void type(String type) {
-        set("type", type);
-    }
-
-    public String group() {
-        return (String) get("group");
-    }
-
-    public void group(String group) {
-        set("group", group);
-    }
-
-    public Integer sort() {
-        return (Integer) get("sort");
-    }
-
-    public void sort(Integer sort) {
-        set("sort", sort);
-    }
-
-    public Integer created() {
-        return (Integer) get("created");
-    }
-
-    public void created(Integer created) {
-        set("created", created);
-    }
-
-    public Integer changed() {
-        return (Integer) get("changed");
-    }
-
-    public void changed(Integer changed) {
-        set("changed", changed);
-    }
-
-    public boolean status() {
-        return Boolean.TRUE.equals(get("status"));
-    }
-
-    public void status(boolean status) {
-        set("status", status);
+    public List<FieldValue> fieldValues(){
+        return null;
     }
 
 }

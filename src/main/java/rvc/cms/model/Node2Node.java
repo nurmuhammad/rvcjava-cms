@@ -1,49 +1,26 @@
 package rvc.cms.model;
 
-import org.javalite.activejdbc.annotations.BelongsTo;
-import org.javalite.activejdbc.annotations.BelongsToParents;
-import org.javalite.activejdbc.annotations.Table;
+import javax.persistence.*;
 
 /**
  * @author nurmuhammad
  */
 
-@Table("node_node")
-@BelongsToParents({
-        @BelongsTo(parent = Node.class, foreignKeyName = "node_id"),
-        @BelongsTo(parent = Node.class, foreignKeyName = "releated_node_id")
-})
+@Entity
+@Table(name = "node_node")
+@Access(AccessType.FIELD)
 public class Node2Node extends SettingsModel {
 
-    public Long nodeId() {
-        return (Long) get("node_id");
-    }
+    @Column(name = "node_id")
+    public Long nodeId;
 
-    public void nodeId(Long nodeId) {
-        set("node_id", nodeId);
-    }
+    @Column(name = "node_releated_id")
+    public Long releatedNodeId;
 
-    public Long releatedNodeId() {
-        return (Long) get("node_releated_id");
-    }
+    @Column(name = "value")
+    public Integer value;
 
-    public void releatedNodeId(Long releatedNodeId) {
-        set("node_releated_id", releatedNodeId);
-    }
+    @Column(name = "sort")
+    public Integer sort;
 
-    public Integer value() {
-        return (Integer) get("value");
-    }
-
-    public void value(Integer value) {
-        set("value", value);
-    }
-
-    public Integer sort() {
-        return (Integer) get("sort");
-    }
-
-    public void sort(Integer sort) {
-        set("sort", sort);
-    }
 }

@@ -12,12 +12,16 @@ public class $ extends rvc.$ {
 
     public static Map<String, String> settings2map(String settings) {
         if (settings == null || settings.length() < 2) return new HashMap<>();
-        return Splitter.on("; ").withKeyValueSeparator(":=").split(settings);
+        return Splitter.on(";;\n").withKeyValueSeparator(":==").split(settings);
     }
 
     public static String map2settings(Map map) {
         if (map == null) return "";
-        Joiner.MapJoiner mapJoiner = Joiner.on("; ").withKeyValueSeparator(":=");
+        Joiner.MapJoiner mapJoiner = Joiner.on(";;\n").withKeyValueSeparator(":==");
         return mapJoiner.join(map);
+    }
+
+    public static Object[] a(Object... objects){
+        return objects;
     }
 }

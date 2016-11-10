@@ -37,6 +37,42 @@
 
     <dependencies>
 
+        <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.hibernate/hibernate-core &ndash;&gt;
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.2.2.Final</version>
+        </dependency>-->
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.2.2.Final</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-hikaricp -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-hikaricp</artifactId>
+            <version>5.2.2.Final</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.38</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc -->
+        <dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>3.15.1</version>
+        </dependency>
+
+
+
         <dependency>
             <groupId>com.rvcjava</groupId>
             <artifactId>rvcjava</artifactId>
@@ -55,11 +91,11 @@
             <version>${pebble.version}</version>
         </dependency>
 
-        <dependency>
+        <!--<dependency>
             <groupId>org.javalite</groupId>
             <artifactId>activejdbc</artifactId>
             <version>1.4.11</version>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>org.quartz-scheduler</groupId>
@@ -91,6 +127,11 @@
             <version>3.20.0-GA</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>2.5.1</version>
+        </dependency>
     </dependencies>
 
     <build>

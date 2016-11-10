@@ -2,6 +2,7 @@ package rvc.cms.model;
 
 import rvc.cms.$;
 
+import javax.persistence.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,26 +10,26 @@ import java.util.Map;
  * @author nurmuhammad
  */
 
+@MappedSuperclass
+@Access(AccessType.FIELD)
 public abstract class SettingsModel extends aModel {
-    Map<String, String> settings;
 
-    public String settings() {
-        return getString("settings");
-    }
+    @Lob
+    @Column(name ="settings")
+    public String settings;
 
-    public void settings(String settings) {
-        setString("settings", settings);
-    }
+    @Transient
+    private transient Map<String, String> settingsMap;
 
     public Map<String, String> map() {
-        if (settings == null) {
-            settings = new HashMap<>($.settings2map(settings()));
+        if (settingsMap == null) {
+            settingsMap = new HashMap<>($.settings2map(settings));
         }
-        return settings;
+        return settingsMap;
     }
 
-    public void map2settings(Map map) {
-        settings($.map2settings(map));
+    private void map2settings(Map map) {
+        settings = $.map2settings(map);
     }
 
     public String setting(String key) {

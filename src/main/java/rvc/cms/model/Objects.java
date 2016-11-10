@@ -1,51 +1,34 @@
 package rvc.cms.model;
 
-import org.javalite.activejdbc.annotations.Table;
+import javax.persistence.*;
 
 /**
  * @author nurmuhammad
  */
 
-@Table("objects")
+@Entity
+@Table(name = "objects")
+@Access(AccessType.FIELD)
 public class Objects extends SettingsModel {
 
-    public Long id() {
-        return (Long) get("id");
-    }
+    @Column(name = "name")
+    public String name;
 
-    public void id(Long id) {
-        set("id", id);
-    }
+    @Lob
+    @Column(name = "description")
+    public String description;
 
-    public String name() {
-        return (String) get("name");
-    }
+    @Column(name = "type")
+    public String type;
 
-    public void name(String name) {
-        set("name", name);
-    }
+    @Lob
+    @Column(name = "java_code")
+    public String javaCode;
 
-    public String description() {
-        return getString("description");
-    }
+    @Column(name = "before_run_object_id")
+    public Long beforeRunObjectId;
 
-    public void description(String description) {
-        set("description", description);
-    }
+    @Column(name = "after_run_object_id")
+    public Long afterRunObjectId;
 
-    public String type() {
-        return (String) get("type");
-    }
-
-    public void type(String type) {
-        set("type", type);
-    }
-
-    public String javaCode() {
-        return getString("java_code");
-    }
-
-    public void javaCode(String javaCode) {
-        set("java_code", javaCode);
-    }
 }

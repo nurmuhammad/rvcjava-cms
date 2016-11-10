@@ -1,56 +1,29 @@
 package rvc.cms.model;
 
+import javax.persistence.*;
+
 /**
  * @author nurmuhammad
  */
 
+@Entity
+@Table(name = "node_types")
+@Access(AccessType.FIELD)
 public class NodeType extends SettingsModel {
 
-    public Long id() {
-        return (Long) get("id");
-    }
+    @Column(name = "type")
+    public String type;
 
-    public void id(Long id) {
-        set("id", id);
-    }
+    @Column(name = "name")
+    public String name;
 
-    public String type() {
-        return (String) get("type");
-    }
+    @Lob
+    @Column(name="description")
+    public String description;
 
-    public void type(String type) {
-        set("type", type);
-    }
+    @Column(name = "domain")
+    public String domain;
 
-    public String name() {
-        return (String) get("name");
-    }
-
-    public void name(String name) {
-        set("name", name);
-    }
-
-    public String description() {
-        return (String) get("description");
-    }
-
-    public void description(String description) {
-        set("description", description);
-    }
-
-    public String domen() {
-        return (String) get("domen");
-    }
-
-    public void domen(String domen) {
-        set("domen", domen);
-    }
-
-    public boolean translate() {
-        return Boolean.TRUE.equals(get("translate"));
-    }
-
-    public void translate(boolean translate) {
-        set("translate", translate);
-    }
+    @Column(name = "translate")
+    public Boolean translate;
 }

@@ -1,99 +1,37 @@
 package rvc.cms.model;
 
-import org.javalite.activejdbc.annotations.BelongsTo;
+import javax.persistence.*;
 
 /**
  * @author nurmuhammad
  */
 
-@BelongsTo(parent = Node.class, foreignKeyName = "profile_node_id")
+@Entity
+@Table(name = "users")
+@Access(AccessType.FIELD)
 public class User extends SettingsModel {
 
-    public Long id() {
-        return (Long) get("id");
-    }
+    @Column(name = "roles")
+    public String roles;
 
-    public void id(Long id) {
-        set("id", id);
-    }
+    @Column(name = "email")
+    public String email;
 
-    public String roles() {
-        return (String) get("roles");
-    }
+    @Column(name = "password")
+    public String password;
 
-    public void roles(String roles) {
-        set("roles", roles);
-    }
+    @Column(name = "status")
+    public Boolean status;
 
-    public String email() {
-        return (String) get("email");
-    }
+    @Column(name = "last_login")
+    public Long lastLogin;
 
-    public void email(String email) {
-        set("email", email);
-    }
+    @Column(name = "last_ip")
+    public String lastIp;
 
-    public String password() {
-        return (String) get("password");
-    }
+    @Column(name = "profile_node_id")
+    public Long profileNodeId;
 
-    public void password(String password) {
-        set("password", password);
-    }
-
-    public Integer created() {
-        return (Integer) get("created");
-    }
-
-    public void created(Integer created) {
-        set("created", created);
-    }
-
-    public Integer changed() {
-        return (Integer) get("changed");
-    }
-
-    public void changed(Long changed) {
-        set("changed", changed);
-    }
-
-    public Long lastLogin() {
-        return (Long) get("last_login");
-    }
-
-    public void lastLogin(int lastLogin) {
-        set("last_login", lastLogin);
-    }
-
-    public String lastIp() {
-        return (String) get("last_ip");
-    }
-
-    public void lastIp(String lastIp) {
-        set("last_ip", lastIp);
-    }
-
-    public boolean status() {
-        return Boolean.TRUE.equals(get("status"));
-    }
-
-    public void status(boolean status) {
-        set("status", status);
-    }
-
-    public long profileNodeId() {
-        return (Long) get("profile_node_id");
-    }
-
-    public void profileNodeId(long profileNodeId) {
-        set("profile_node_id", profileNodeId);
-    }
-
-    public String domen() {
-        return (String) get("domen");
-    }
-
-    public void domen(String domen) {
-        set("domen", domen);
-    }
+    @Column(name = "domain")
+    public String domain;
 }
