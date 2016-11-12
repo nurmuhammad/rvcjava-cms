@@ -29,8 +29,12 @@ public class User extends SettingsModel {
     @Column(name = "last_ip")
     public String lastIp;
 
-    @Column(name = "profile_node_id")
-    public Long profileNodeId;
+//    @Column(name = "profile_node_id")
+//    public Long profileNodeId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "profile_node_id")
+    public Node profileNode;
 
     @Column(name = "domain")
     public String domain;

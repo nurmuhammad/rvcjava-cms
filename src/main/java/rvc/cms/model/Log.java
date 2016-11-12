@@ -24,7 +24,4 @@ public class Log extends SettingsModel {
     @Column(name = "hostname")
     public String hostname;
 
-    @Column(name = "timestamp")
-    public Long timestamp;
-
 }

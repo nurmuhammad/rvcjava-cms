@@ -10,14 +10,17 @@ import javax.persistence.*;
 @Access(AccessType.FIELD)
 public class FieldValue extends SettingsModel {
 
-    @Column(name = "user_id")
-    public Long userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    public User user;
 
-    @Column(name = "field_id")
-    public Long fieldId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "field_id")
+    public Field field;
 
-    @Column(name = "node_id_value")
-    public Long nodeIdValue;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "node_id_value")
+    public Node nodeValue;
 
     @Lob
     @Column(name = "value_text")
@@ -39,10 +42,5 @@ public class FieldValue extends SettingsModel {
 
     @Column(name = "sort")
     public Integer sort;
-
-
-    public Node nodeValue(){
-        return null;
-    }
 
 }

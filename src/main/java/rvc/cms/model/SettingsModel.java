@@ -14,30 +14,32 @@ import java.util.Map;
 @Access(AccessType.FIELD)
 public abstract class SettingsModel extends aModel {
 
-    @Lob
-    @Column(name ="settings")
-    public String settings;
+//    @Basic(fetch = FetchType.LAZY)
+    @OneToOne (fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @JoinColumn(name = "settings_id")
+    private Settings settings;
 
-    @Transient
-    private transient Map<String, String> settingsMap;
-
-    public Map<String, String> map() {
-        if (settingsMap == null) {
-            settingsMap = new HashMap<>($.settings2map(settings));
+    public Settings getSettings() {
+        if((id==null || id==0L) && settings == null ){
+            settings = new Settings();
+            return settings;
         }
-        return settingsMap;
+        return settings;// = lazy(settings, schema);
     }
 
-    private void map2settings(Map map) {
-        settings = $.map2settings(map);
+    public void setSettings(Settings settings) {
+        this.settings = settings;
+    }
+
+    public Map<String, String> map() {
+        return getSettings().map();
     }
 
     public String setting(String key) {
-        return map().get(key);
+        return getSettings().setting(key);
     }
 
     public void setting(String key, String value) {
-        map().put(key, value);
-        map2settings(map());
+        getSettings().setting(key, value);
     }
 }

@@ -11,11 +11,19 @@ import javax.persistence.*;
 @Access(AccessType.FIELD)
 public class Node2Node extends SettingsModel {
 
-    @Column(name = "node_id")
-    public Long nodeId;
+//    @Column(name = "node_id")
+//    public Long nodeId;
 
-    @Column(name = "node_releated_id")
-    public Long releatedNodeId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "node_id")
+    public Node node;
+
+//    @Column(name = "node_releated_id")
+//    public Long releatedNodeId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "node_releated_id")
+    public Node releatedNode;
 
     @Column(name = "value")
     public Integer value;

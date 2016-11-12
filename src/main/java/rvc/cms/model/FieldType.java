@@ -11,8 +11,9 @@ import javax.persistence.*;
 @Access(AccessType.FIELD)
 public class FieldType extends SettingsModel {
 
-    @Column(name = "node_type_id")
-    public Long nodeTypeId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "node_type_id")
+    public NodeType nodeType;
 
     @Column(name = "label")
     public String label;
@@ -43,9 +44,4 @@ public class FieldType extends SettingsModel {
     @Lob
     @Column(name = "return_code")
     public String returnCode;
-
-
-    public NodeType nodeType(){
-        return null;
-    }
 }

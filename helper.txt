@@ -20,8 +20,22 @@ node:
 				value:
 
 
-
+restart java application
 http://lewisleo.blogspot.jp/2012/08/programmatically-restart-java.html
+
+hibernate 5 documentation // see createFilter()
+https://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html#mapping-column-filter
+
+Ehcache documentation
+http://www.ehcache.org/documentation/2.7/integrations/hibernate.html
+
+Hibernate query cache
+http://puredanger.github.io/tech.puredanger.com/2009/07/10/hibernate-query-cache/
+
+Hibernate EHCache – Hibernate Second Level Cache
+http://www.journaldev.com/2980/hibernate-ehcache-hibernate-second-level-cache
+
+------------------------------ Scroller pager------------------------
 
 Query query = session.createQuery(query);
 query.setReadOnly(true);
@@ -32,3 +46,25 @@ while (results.next()) {
     Object row = results.get();
 }
 results.close();
+
+----------------------- Lazy initialize-----------------------------
+http://stackoverflow.com/questions/15359306/how-to-load-lazy-fetched-items-from-hibernate-jpa-in-my-controller
+
+@Override
+public FaqQuestions getFaqQuestionById(Long questionId) {
+    session = sessionFactory.openSession();
+    tx = session.beginTransaction();
+    FaqQuestions faqQuestions = null;
+    try {
+        faqQuestions = (FaqQuestions) session.get(FaqQuestions.class,
+                questionId);
+        Hibernate.initialize(faqQuestions.getFaqAnswers());
+
+        tx.commit();
+        faqQuestions.getFaqAnswers().size();
+    } finally {
+        session.close();
+    }
+    return faqQuestions;
+}
+

@@ -1,5 +1,8 @@
 package rvc.cms.model;
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.*;
 
 /**
@@ -9,10 +12,15 @@ import javax.persistence.*;
 @Entity
 @Table(name = "votes_cache")
 @Access(AccessType.FIELD)
+@DynamicInsert @DynamicUpdate
 public class VoteCache extends aModel {
 
-    @Column(name = "node_id")
-    public Long nodeId;
+//    @Column(name = "node_id")
+//    public Long nodeId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "node_id")
+    public Node node;
 
     @Column(name = "value")
     public Double value;
@@ -22,8 +30,5 @@ public class VoteCache extends aModel {
 
     @Column(name = "function", length = 16)
     public String function;
-
-    @Column(name = "timestamp")
-    public Long timestamp;
 
 }

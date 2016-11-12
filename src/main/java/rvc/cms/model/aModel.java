@@ -1,7 +1,13 @@
 package rvc.cms.model;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.engine.spi.SharedSessionContractImplementor;
+import org.hibernate.proxy.HibernateProxy;
+import org.hibernate.proxy.LazyInitializer;
 import org.hibernate.resource.transaction.spi.TransactionStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +25,8 @@ import java.util.*;
 
 @MappedSuperclass
 @Access(AccessType.FIELD)
+@DynamicInsert
+@DynamicUpdate
 public abstract class aModel implements Serializable {
     private static final Logger logger = LoggerFactory.getLogger(aModel.class);
 
@@ -31,21 +39,12 @@ public abstract class aModel implements Serializable {
     public Long id;
 
     @Column(name = "created")
-    public Long created;
+    public Integer created;
 
     @Column(name = "changed")
-    public Long changed;
+    public Integer changed;
 
-    @Column(name = "status_comment", length = 255)
-    public String comment;
-
-    @Column(name = "status_username", length = 64)
-    public String username;
-
-    @Column(name = "status_id", length = 16)
-    public String statusId;
-
-    @Column(name = "schema", length = 255)
+    @Column(name = "_schema", length = 255)
     public String schema;
 
     public <T> T get(String field) {
@@ -54,7 +53,7 @@ public abstract class aModel implements Serializable {
             return (T) fld.get(this);
         } catch (NoSuchFieldException e) {
             try {
-                return (T)$.invoke(this, field);
+                return (T) $.invoke(this, field);
             } catch (NoSuchMethodException ignored) {
                 e.printStackTrace();
                 return (T) attribute(field);
@@ -100,9 +99,9 @@ public abstract class aModel implements Serializable {
         this.schema = schema;
         tx((session -> {
             if (this.created == null) {
-                this.created = Instant.now().getEpochSecond();
+                this.created = (int) Instant.now().getEpochSecond();
             }
-            this.changed = Instant.now().getEpochSecond();
+            this.changed = (int) Instant.now().getEpochSecond();
 
             session.saveOrUpdate(this);
             return this;
@@ -128,6 +127,25 @@ public abstract class aModel implements Serializable {
         delete(schema);
     }
 
+    public static <T> T lazy(T lazy, String schema) {
+        if (lazy instanceof HibernateProxy) {
+            LazyInitializer lazyInitializer = ((HibernateProxy) lazy).getHibernateLazyInitializer();
+            if (lazyInitializer.getSession() == null) {
+                SharedSessionContractImplementor session =
+                        (SharedSessionContractImplementor) HibernateUtil.getSession(schema);
+                Transaction tx = session.getTransaction();
+                if (tx.getStatus() != TransactionStatus.ACTIVE) {
+                    tx.begin();
+                }
+                lazyInitializer.setSession(session);
+                Hibernate.initialize(lazy);
+                lazyInitializer.initialize();
+                tx.commit();
+            }
+        }
+        return lazy;
+    }
+
     public static <T extends aModel> T findById(Class<T> aClass, Long id, String schema) {
         return tx((session) -> session.get(aClass, id), schema);
     }
@@ -144,6 +162,10 @@ public abstract class aModel implements Serializable {
         return findAll(aClass, HibernateUtil.DEFAULT_PROPERTIES);
     }
 
+    public static void deleteById(Class<? extends aModel> aClass, Object id, String schema) {
+
+    }
+
     public static long count(Class<? extends aModel> aClass, String schema) {
         return tx((session) -> session.createQuery("select count(*) from " + aClass.getSimpleName()).uniqueResult(), schema);
     }
@@ -156,40 +178,40 @@ public abstract class aModel implements Serializable {
         return tx((session) -> {
             org.hibernate.query.Query query = session.createQuery("select count(*) from " + aClass.getSimpleName() + " where " + where);
             for (int i = 1; i < params.length; i++) {
-                query.setParameter(i, params[i]);
+                query.setParameter(i, params[i-1]);
             }
             return query.uniqueResult();
         }, schema);
     }
 
-    public static long count(Class<? extends aModel> aClass, String where, Object... params){
+    public static long count(Class<? extends aModel> aClass, String where, Object... params) {
         return count(aClass, HibernateUtil.DEFAULT_PROPERTIES, where, params);
     }
 
-    public static <T extends aModel> List<T> where(Class<T> aClass, String schema, String where, Object... params){
+    public static <T extends aModel> List<T> where(Class<T> aClass, String schema, String where, Object... params) {
         return tx(
                 (session) -> {
                     org.hibernate.query.Query query = session.createQuery("from " + aClass.getSimpleName() + " where " + where);
                     for (int i = 1; i < params.length; i++) {
-                        query.setParameter(i, params[i]);
+                        query.setParameter(i, params[i-1]);
                     }
                     return query.list();
                 }, schema);
     }
 
-    public static <T extends aModel> List<T> where(Class<T> aClass, String where, Object... params){
+    public static <T extends aModel> List<T> where(Class<T> aClass, String where, Object... params) {
         return where(aClass, HibernateUtil.DEFAULT_PROPERTIES, where, params);
     }
 
     public static org.hibernate.query.Query query(String query, String schema, Object... params) {
         org.hibernate.query.Query q = HibernateUtil.getSession(schema).createQuery(query);
-        for (int i = 1; i < params.length; i++) {
+        for (int i = 0; i < params.length; i++) {
             q.setParameter(i, params[i]);
         }
         return q;
     }
 
-    public static org.hibernate.query.Query query(String query, Object... params){
+    public static org.hibernate.query.Query query(String query, Object... params) {
         return query(query, HibernateUtil.DEFAULT_PROPERTIES, params);
     }
 

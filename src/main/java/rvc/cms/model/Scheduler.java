@@ -27,10 +27,18 @@ public class Scheduler extends SettingsModel {
     @Column(name = "type")
     public String type;
 
-    @Column(name = "node_id")
-    public Long nodeId;
+//    @Column(name = "node_id")
+//    public Long nodeId;
 
-    @Column(name = "object_id")
-    public Long objectId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "node_id")
+    public Node node;
+
+//    @Column(name = "object_id")
+//    public Long objectId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "object_id")
+    public Objects object;
 
 }

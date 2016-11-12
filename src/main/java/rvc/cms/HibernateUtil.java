@@ -53,14 +53,7 @@ public class HibernateUtil {
                 logger.error("Class not found:" + className, e);
             }
         });
-                /*config.addAnnotatedClass(Field.class)
-                .addAnnotatedClass(FieldType.class).addAnnotatedClass(FieldValue.class)
-                .addAnnotatedClass(Log.class).addAnnotatedClass(Node.class)
-                .addAnnotatedClass(Node2Node.class).addAnnotatedClass(NodeType.class)
-                .addAnnotatedClass(Objects.class).addAnnotatedClass(Scheduler.class)
-                .addAnnotatedClass(User.class).addAnnotatedClass(Variable.class)
-                .addAnnotatedClass(Vote.class).addAnnotatedClass(VoteCache.class);*/
-
+//        config.setEntityNotFoundDelegate(); // TODO implement
         sessionFactory = config.buildSessionFactory(registry);
 
         sessionFactoryMap.put(key, sessionFactory);
@@ -74,14 +67,17 @@ public class HibernateUtil {
 
     public static Session getSession(String key) {
         SessionFactory sessionFactory = getSessionFactory(key);
+//        sessionFactory.getStatistics() //TODO enable-disable statistics by admin
         Session session = null;
         try {
+//            logger.info("Trying to get current session object.");
             if (sessionFactory.getCurrentSession() != null) {
                 session = sessionFactory.getCurrentSession();
             }
         } catch (Exception e) {
             logger.warn("no current session context. " , e);
             try {
+                logger.info("Trying to open session object.");
                 session = sessionFactory.openSession();
             } catch (HibernateException e1) {
                 logger.error("Error when opening session." , e);
