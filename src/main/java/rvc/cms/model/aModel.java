@@ -17,18 +17,24 @@ import rvc.cms.HibernateUtil;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author nurmuhammad
  */
 
 @MappedSuperclass
-@Access(AccessType.FIELD)
 @DynamicInsert
 @DynamicUpdate
 public abstract class aModel implements Serializable {
     private static final Logger logger = LoggerFactory.getLogger(aModel.class);
+
+    Long id;
+    Integer created;
+    Integer changed;
+    String schema;
 
     @Transient
     private transient Map<String, aModel> cacheAttributes;
@@ -36,17 +42,54 @@ public abstract class aModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    public Long id;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     @Column(name = "created")
-    public Integer created;
+    public Integer getCreated() {
+        return created;
+    }
+
+    public void setCreated(Integer created) {
+        this.created = created;
+    }
 
     @Column(name = "changed")
-    public Integer changed;
+    public Integer getChanged() {
+        return changed;
+    }
+
+    public void setChanged(Integer changed) {
+        this.changed = changed;
+    }
 
     @Column(name = "_schema", length = 255)
-    public String schema;
+    public String getSchema() {
+        return schema;
+    }
 
+    public void setSchema(String schema) {
+        this.schema = schema;
+    }
+
+    @PrePersist
+    @PreUpdate
+    void pre() {
+        if (this.created == null) {
+            this.created = (int) Instant.now().getEpochSecond();
+        }
+        this.changed = (int) Instant.now().getEpochSecond();
+
+        //TODO : store user data
+        //TODO : impl get schema if null
+    }
+
+    @Transient
     public <T> T get(String field) {
         try {
             java.lang.reflect.Field fld = getClass().getField(field);
@@ -98,11 +141,6 @@ public abstract class aModel implements Serializable {
     public void saveOrUpdate(String schema) {
         this.schema = schema;
         tx((session -> {
-            if (this.created == null) {
-                this.created = (int) Instant.now().getEpochSecond();
-            }
-            this.changed = (int) Instant.now().getEpochSecond();
-
             session.saveOrUpdate(this);
             return this;
         }), schema);
@@ -177,8 +215,8 @@ public abstract class aModel implements Serializable {
     public static long count(Class<? extends aModel> aClass, String schema, String where, Object... params) {
         return tx((session) -> {
             org.hibernate.query.Query query = session.createQuery("select count(*) from " + aClass.getSimpleName() + " where " + where);
-            for (int i = 1; i < params.length; i++) {
-                query.setParameter(i, params[i-1]);
+            for (int i = 0; i < params.length; i++) {
+                query.setParameter(i, params[i]);
             }
             return query.uniqueResult();
         }, schema);
@@ -192,8 +230,8 @@ public abstract class aModel implements Serializable {
         return tx(
                 (session) -> {
                     org.hibernate.query.Query query = session.createQuery("from " + aClass.getSimpleName() + " where " + where);
-                    for (int i = 1; i < params.length; i++) {
-                        query.setParameter(i, params[i-1]);
+                    for (int i = 0; i < params.length; i++) {
+                        query.setParameter(i, params[i]);
                     }
                     return query.list();
                 }, schema);

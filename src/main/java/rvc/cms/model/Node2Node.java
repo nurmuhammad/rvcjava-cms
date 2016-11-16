@@ -8,27 +8,55 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "node_node")
-@Access(AccessType.FIELD)
 public class Node2Node extends SettingsModel {
 
-//    @Column(name = "node_id")
-//    public Long nodeId;
+    Node node;
+    Node releatedNode;
+    String type;
+    Integer value;
+    Integer sort;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "node_id")
-    public Node node;
+    public Node getNode() {
+        return node;
+    }
 
-//    @Column(name = "node_releated_id")
-//    public Long releatedNodeId;
+    public void setNode(Node node) {
+        this.node = node;
+    }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "node_releated_id")
-    public Node releatedNode;
+    public Node getReleatedNode() {
+        return releatedNode;
+    }
 
+    public void setReleatedNode(Node releatedNode) {
+        this.releatedNode = releatedNode;
+    }
+    @Column(name = "type", length = 32)
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
     @Column(name = "value")
-    public Integer value;
+    public Integer getValue() {
+        return value;
+    }
 
+    public void setValue(Integer value) {
+        this.value = value;
+    }
     @Column(name = "sort")
-    public Integer sort;
+    public Integer getSort() {
+        return sort;
+    }
 
+    public void setSort(Integer sort) {
+        this.sort = sort;
+    }
 }

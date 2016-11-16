@@ -1,6 +1,8 @@
 package rvc.cms.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * @author nurmuhammad
@@ -8,20 +10,46 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "translates")
-@Access(AccessType.FIELD)
 public class Translate extends aModel {
 
-    @Lob
-    @Column(name = "source")
-    public String source;
+    String source;
+    String translate;
+    String language;
+    String location;
 
-    @Lob
-    @Column(name = "translate")
-    public String translate;
+    @Column(name = "source", length = 1024)
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    @Column(name = "translate", length = 1024)
+    public String getTranslate() {
+        return translate;
+    }
+
+    public void setTranslate(String translate) {
+        this.translate = translate;
+    }
 
     @Column(name = "language")
-    public String language;
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
 
     @Column(name = "location")
-    public String location;
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 }

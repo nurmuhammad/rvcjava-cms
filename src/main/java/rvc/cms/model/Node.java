@@ -12,26 +12,61 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "nodes")
-@Access(AccessType.FIELD)
-@DynamicInsert @DynamicUpdate
+@DynamicInsert
+@DynamicUpdate
 public class Node extends SettingsModel {
+
+    User user;
+    NodeType nodeType;
+    Details details;
+    Boolean status;
+    String domain;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    public User user;
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "node_type_id")
-    public NodeType nodeType;
+    public NodeType getNodeType() {
+        return nodeType;
+    }
+
+    public void setNodeType(NodeType nodeType) {
+        this.nodeType = nodeType;
+    }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "detail_id")
-    public Details details;
+    public Details getDetails() {
+        return details;
+    }
+
+    public void setDetails(Details details) {
+        this.details = details;
+    }
 
     @Column(name = "status")
-    public Boolean status;
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
 
     @Column(name = "domain")
-    public String domain;
+    public String getDomain() {
+        return domain;
+    }
 
+    public void setDomain(String domain) {
+        this.domain = domain;
+    }
 }

@@ -6,22 +6,15 @@
  */
 package org.hibernate.proxy;
 
-import java.io.Serializable;
-
-import org.hibernate.FlushMode;
-import org.hibernate.HibernateException;
-import org.hibernate.LazyInitializationException;
-import org.hibernate.Session;
-import org.hibernate.SessionException;
-import org.hibernate.TransientObjectException;
+import org.hibernate.*;
 import org.hibernate.engine.spi.EntityKey;
 import org.hibernate.engine.spi.SessionFactoryImplementor;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.internal.SessionFactoryRegistry;
 import org.hibernate.persister.entity.EntityPersister;
-
 import org.jboss.logging.Logger;
-import rvc.cms.HibernateUtil;
+
+import java.io.Serializable;
 
 /**
  * Convenience base class for lazy initialization handlers.  Centralizes the basic plumbing of doing lazy

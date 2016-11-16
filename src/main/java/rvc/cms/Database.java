@@ -1,22 +1,17 @@
 package rvc.cms;
 
-import org.h2.tools.Server;
-import org.hibernate.Hibernate;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.h2.tools.Backup;
 import org.h2.tools.Recover;
 import org.h2.tools.Script;
-import org.hibernate.engine.spi.SharedSessionContractImplementor;
-import org.hibernate.proxy.HibernateProxy;
-import org.hibernate.proxy.LazyInitializer;
-import org.hibernate.resource.transaction.spi.TransactionStatus;
+import org.h2.tools.Server;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import rvc.cms.init.Config;
-import rvc.cms.model.*;
+import rvc.cms.model.FieldType;
+import rvc.cms.model.Vote;
 
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
@@ -30,30 +25,26 @@ public class Database {
 
     public static void main(String[] args) throws Exception {
         Server webServer = Server.createWebServer("-webAllowOthers", "-webPort", "8083").start();
+        HibernateUtil.getSession();
         Database database = new Database();
-        database.test2();
-//        recovery();
-//        backupZip();
-//        backupSql();
+        long l = System.currentTimeMillis();
+//        database.test2();
+
+        System.out.print("time=");
+        System.out.println(System.currentTimeMillis()-l);
 //        database.setUp();
-//        System.out.println("\n\n\n\n\n");
-//        System.out.println("test");
 //        System.out.println("\n\n\n\n\n");
     }
 
     void test1() {
         Vote vote = new Vote();
-        vote.type = "type";
-        vote.value = 3.4d;
+        vote.setType("type");
+        vote.setValue(3.4d);
         vote.saveOrUpdate();
 
-        vote = new Vote();
-        vote.type = "salom";
-        vote.value = 500d;
-        vote.saveOrUpdate();
         System.out.println("\n\n\n\n");
         long l = System.currentTimeMillis();
-        System.out.println(Vote.findById(Vote.class, 130L).type);
+        System.out.println(Vote.findById(Vote.class, 130L).getType());
         System.out.println(System.currentTimeMillis() - l);
         System.out.println("\n\n");
         l = System.currentTimeMillis();
@@ -73,7 +64,8 @@ public class Database {
     }
 
     void test2() {
-
+//        FieldType fieldType = FieldType.findById(FieldType.class, 411068L);
+//        System.out.println(fieldType.id);
         /*Vote vote = Vote.findById(Vote.class, 1657L);
         if ( vote.node instanceof HibernateProxy) {
             LazyInitializer lazyInitializer = ( (HibernateProxy) vote.node ).getHibernateLazyInitializer();
@@ -97,14 +89,16 @@ public class Database {
         System.out.println(vote.node.changed);
         */
 
-        HibernateUtil.getSession().beginTransaction();
-        List list = FieldType.query("select f from FieldType f where f.id < ?", 10L).list();
-        HibernateUtil.getSession().getTransaction().commit();
+//        Session session = HibernateUtil.getSession();
+//        session.beginTransaction();
+//        List list = session.createQuery("from FieldType f where f.id < ?")
+//                .setParameter(0, 10L).getResultList();
+//        session.getTransaction().commit();
 
 //        FieldType fieldType = FieldType.findById(FieldType.class, 1L);
 //        System.out.println(fieldType);
 
-        if(1==1) return;
+//        if(1==1) return;
 
         long i = 0;
 
@@ -112,13 +106,14 @@ public class Database {
 
         while (true) {
             FieldType objects = new FieldType();
-            objects.name = $.b64encode(UUID.randomUUID().toString()).substring(0, 10).toUpperCase();
-            objects.type = "template";
-            objects.setting(objects.name, UUID.randomUUID().toString().toUpperCase());
-            objects.setting(objects.type, UUID.randomUUID().toString().toUpperCase());
+            objects.setName($.b64encode(UUID.randomUUID().toString()).substring(0, 10).toUpperCase());
+            objects.setType("template");
+            objects.setting(objects.getName(), UUID.randomUUID().toString().toUpperCase());
+            objects.setting(objects.getType(), UUID.randomUUID().toString().toUpperCase());
             objects.setting("h2", null);
-            objects.required = true;
-            objects.label = "localhost";
+            objects.setRequired(true);
+            objects.setLabel("localhost");
+
 
             /*long id = random.nextInt(1000)+1;
             Node node = Node.findById(Node.class, id);
@@ -129,11 +124,11 @@ public class Database {
 
             i++;
 
-            if( i % 100 == 0 ) {
+            if( i % 1000 == 0 ) {
                 System.out.println(i);
             }
 
-            if (i > 1000) {
+            if (i >= 1500_000) {
                 break;
             }
         }
@@ -149,7 +144,7 @@ public class Database {
             tx = session.beginTransaction();
 
             Vote vote = new Vote();
-            vote.type = "test";
+            vote.setType("test");
 
             session.saveOrUpdate(vote);
             tx.commit();

@@ -1,7 +1,6 @@
 package rvc.cms;
 
 import rvc.cms.init.Config;
-import rvc.cms.model.User;
 
 /**
  * @author nurmuhammad

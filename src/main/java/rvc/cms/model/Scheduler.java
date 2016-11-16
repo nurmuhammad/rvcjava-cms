@@ -8,37 +8,79 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "scheduler")
-@Access(AccessType.FIELD)
 public class Scheduler extends SettingsModel {
 
+    String name;
+    Long runAt;
+    Long lastEndAt;
+    String action;
+    String type;
+    Node node;
+    Objects object;
+
     @Column(name = "name")
-    public String name;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     @Column(name = "run_at")
-    public Long runAt;
+    public Long getRunAt() {
+        return runAt;
+    }
+
+    public void setRunAt(Long runAt) {
+        this.runAt = runAt;
+    }
 
     @Column(name = "last_end_at")
-    public Long lastEndAt;
+    public Long getLastEndAt() {
+        return lastEndAt;
+    }
+
+    public void setLastEndAt(Long lastEndAt) {
+        this.lastEndAt = lastEndAt;
+    }
 
     @Lob
     @Column(name = "action")
-    public String action;
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
 
     @Column(name = "type")
-    public String type;
+    public String getType() {
+        return type;
+    }
 
-//    @Column(name = "node_id")
-//    public Long nodeId;
+    public void setType(String type) {
+        this.type = type;
+    }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "node_id")
-    public Node node;
+    public Node getNode() {
+        return node;
+    }
 
-//    @Column(name = "object_id")
-//    public Long objectId;
+    public void setNode(Node node) {
+        this.node = node;
+    }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "object_id")
-    public Objects object;
+    public Objects getObject() {
+        return object;
+    }
 
+    public void setObject(Objects object) {
+        this.object = object;
+    }
 }

@@ -2,7 +2,9 @@ package rvc.cms.model;
 
 import rvc.cms.$;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,35 +13,43 @@ import java.util.Map;
  */
 
 @MappedSuperclass
-@Access(AccessType.FIELD)
 public abstract class SettingsModel extends aModel {
 
-//    @Basic(fetch = FetchType.LAZY)
-    @OneToOne (fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    @JoinColumn(name = "settings_id")
-    private Settings settings;
+    String settings;
 
-    public Settings getSettings() {
-        if((id==null || id==0L) && settings == null ){
-            settings = new Settings();
-            return settings;
-        }
-        return settings;// = lazy(settings, schema);
+    @Transient
+    private transient Map<String, String> settingsMap;
+
+    @Column(name = "settings", length = 1024)
+    public String getSettings() {
+        return settings;
     }
 
-    public void setSettings(Settings settings) {
+    public void setSettings(String settings) {
         this.settings = settings;
     }
 
+    @Transient
     public Map<String, String> map() {
-        return getSettings().map();
+        if (settingsMap == null) {
+            settingsMap = new HashMap<>($.settings2map(settings));
+        }
+        return settingsMap;
     }
 
+    @Transient
+    private void map2settings(Map map) {
+        settings = $.map2settings(map);
+    }
+
+    @Transient
     public String setting(String key) {
-        return getSettings().setting(key);
+        return map().get(key);
     }
 
+    @Transient
     public void setting(String key, String value) {
-        getSettings().setting(key, value);
+        map().put(key, value);
+        map2settings(map());
     }
 }

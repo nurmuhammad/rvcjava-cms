@@ -8,6 +8,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import rvc.cms.init.HibernateInterceptor;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -54,6 +55,8 @@ public class HibernateUtil {
             }
         });
 //        config.setEntityNotFoundDelegate(); // TODO implement
+        HibernateInterceptor interceptor = new HibernateInterceptor();
+        config.setInterceptor(interceptor);
         sessionFactory = config.buildSessionFactory(registry);
 
         sessionFactoryMap.put(key, sessionFactory);

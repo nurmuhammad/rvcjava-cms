@@ -68,3 +68,5 @@ public FaqQuestions getFaqQuestionById(Long questionId) {
     return faqQuestions;
 }
 
+------------------------h2 backup ------------------
+java -cp h2-1.4.192.jar org.h2.tools.Script -url jdbc:h2:b:/tmp/rvc/h2cms -user sa -password 12345 -script test.zip -options compression zip
